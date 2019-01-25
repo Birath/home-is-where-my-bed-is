@@ -18,7 +18,7 @@ func _ready():
 func init(car_type):
 	self.car_type = car_type;
 	displacement = cars[car_type][0].size / 2
-	$CollisionShape2D.shape.extents = displacement
+	$CarShape.shape.extents = displacement
 
 func _draw():
 	for shape in cars[car_type]:

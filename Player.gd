@@ -20,6 +20,11 @@ func get_input():
 	if Input.is_action_pressed('player_right'):
 		velocity.x += 1
 	velocity = velocity.normalized() * speed
+	
+	if Input.is_action_pressed('player_interact'):
+		for body in $InteractArea.get_overlapping_bodies():
+			if body.is_in_group("npc"):
+				body.interact_with()
 
 func _process(delta):
 	get_input()
