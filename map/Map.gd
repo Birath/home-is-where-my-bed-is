@@ -1,13 +1,19 @@
 extends Node2D
 
 
-var path_grid;
+var path_grid
 var road_grid
 
-const WIDTH = 10;
-const HEIGHT = 10;
+const WIDTH = 10
+const HEIGHT = 10
 
-const GRID_SIZE = 50.0;
+const GRID_SIZE = 100.0
+
+const ROAD_WIDTH = 10.0
+const ROAD_COLOR = Color(0.2, 0.2, 0.2)
+
+const SIDEWALK_WIDTH = 6.0
+const SIDEWALK_COLOR = Color(0.4, 0.4, 0.4)
 
 enum Direction {
 	RIGHT,
@@ -28,21 +34,49 @@ func _ready():
 	road_grid.resize(2*WIDTH*HEIGHT + WIDTH + HEIGHT)
 	for road in road_grid:
 		road = true
+	update()
 	return
 
-static func path_index(x, y):
+func _draw():
+	draw_road(0, 0, true)
+	draw_road(0, 0, false)
+	
+	draw_road(0, -1, true)
+	draw_road(-1, 0, false)
+
+func draw_road(x, y, col = false):
+	#self.draw_rect(Rect2(0, 0, ROAD_WIDTH * 2, ROAD_WIDTH * 2), ROAD_COLOR, true)
+	print("drawing road")
+	if col:
+		var rect = Rect2(x * GRID_SIZE - ROAD_WIDTH, y * GRID_SIZE + ROAD_WIDTH, ROAD_WIDTH * 2, GRID_SIZE - ROAD_WIDTH * 2)
+		self.draw_rect(rect, ROAD_COLOR, true)
+		rect.position.x = x * GRID_SIZE - ROAD_WIDTH - SIDEWALK_WIDTH
+		rect.size.x = SIDEWALK_WIDTH
+		self.draw_rect(rect, SIDEWALK_COLOR, true)
+		rect.position.x =  x * GRID_SIZE + ROAD_WIDTH
+		self.draw_rect(rect, SIDEWALK_COLOR, true)
+	else:
+		var rect = Rect2(x * GRID_SIZE + ROAD_WIDTH, y * GRID_SIZE - ROAD_WIDTH, GRID_SIZE - ROAD_WIDTH * 2, ROAD_WIDTH * 2)	
+		self.draw_rect(rect, ROAD_COLOR, true)
+		rect.position.y = y * GRID_SIZE - ROAD_WIDTH - SIDEWALK_WIDTH
+		rect.size.y = SIDEWALK_WIDTH
+		self.draw_rect(rect, SIDEWALK_COLOR, true)
+		rect.position.y =  y * GRID_SIZE + ROAD_WIDTH
+		self.draw_rect(rect, SIDEWALK_COLOR, true)
+
+func path_index(x, y):
 	return x + y * (WIDTH + 1);
 
-static func path_x(index):
+func path_x(index):
 	return index % (WIDTH + 1)
 
-static func path_y(index):
+func path_y(index):
 	return index / (WIDTH + 1)
 
-static func path_coords(index):
+func path_coords(index):
 	return Vector2(path_x(index), path_y(index))
 
-static func path_connected_nodes(index):
+func path_connected_nodes(index):
 	var x = path_x(index)
 	var y = path_y(index)
 	var connected = []
@@ -57,7 +91,7 @@ static func path_connected_nodes(index):
 	return connected
 
 
-static func road_index(x, y, col = false):
+func road_index(x, y, col = false):
 	var index = 0
 	if col:
 		return WIDTH * (HEIGHT + 1) + x * HEIGHT + y
@@ -65,17 +99,17 @@ static func road_index(x, y, col = false):
 		return x + y * WIDTH
 	return index
 
-static func road_x(index, col = false):
+func road_x(index, col = false):
 	if col:
 		return (index -  WIDTH * (HEIGHT + 1)) / HEIGHT
 	return index % WIDTH
 
-static func road_y(index, col = false):
+func road_y(index, col = false):
 	if col:
 		return (index -  WIDTH * (HEIGHT + 1)) % HEIGHT
 	return index / WIDTH
 
-static func get_road(x, y, direction):
+func get_road(x, y, direction):
 	match(direction):
 		UP:
 			return
