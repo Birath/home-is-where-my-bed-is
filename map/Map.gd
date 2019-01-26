@@ -37,7 +37,7 @@ func _ready():
 	path_grid = []
 	path_grid.resize((WIDTH + 1) * (HEIGHT + 1))
 	for i in range(path_grid.size()):
-		path_grid[i] = [path_x(i) != (WIDTH + 1), path_y(i) != 0, path_x(i) != 0, path_y(i) != (HEIGHT + 1)]
+		path_grid[i] = [path_x(i) != (WIDTH), path_y(i) != 0, path_x(i) != 0, path_y(i) != (HEIGHT)]
 	
 	### CREATE ROAD GRID ###
 	road_grid = []
@@ -54,6 +54,9 @@ func _ready():
 	var park = building.new(self, "park", 0, 0)
 	$buildings.add_child(park)
 	
+	for index in range(building_grid.size()):
+		var sml = building.new(self, "park", 0, 0)
+		$buildings.add_child(sml)
 	
 	update()
 	return
