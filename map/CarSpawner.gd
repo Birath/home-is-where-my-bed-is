@@ -39,7 +39,7 @@ func _ready():
 			if index != -1:
 				spawn_grids.append(index)
 	spawn_cars(spawn_grids)
-
+	#spawn_cars([0])
 
 func get_player_grid():
 	var x = int(round(player.position.x)) / int(map.GRID_SIZE)
@@ -59,7 +59,6 @@ func spawn_cars(grid_indexes):
 	var ai
 	for grid in grid_indexes:
 		var avaliable_directions = shuffle_list([NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST])
-		var amount = 0
 		#for i in range(randi() % 4 + 1):
 		for i in range(1):
 			ai = car.instance()
@@ -77,11 +76,8 @@ func spawn_cars(grid_indexes):
 				SOUTH_EAST:
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE - map.ROAD_WIDTH / 2 
 					ai.position.y = map.path_y(grid) * map.GRID_SIZE - map.ROAD_WIDTH / 2
-			
 			add_child(ai)
 			avaliable_directions.pop_front()
-			amount += 1
-		print("Amount spawned: ", amount)
 			
 func spawn_infront_of_player(node, offset, direction):
 	var spawn_nodes = []

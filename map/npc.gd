@@ -29,7 +29,7 @@ func _ready():
 			if index != -1:
 				spawn_grids.append(index)
 	spawn_npcs(spawn_grids)
-	#pawn_npcs([0])
+	#spawn_npcs([0])
 
 
 func get_player_grid():
@@ -50,7 +50,6 @@ func spawn_npcs(grid_indexes):
 	var ai
 	for grid in grid_indexes:
 		var avaliable_directions = shuffle_list([NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST])
-		var amount = 0
 		#for i in range(randi() % 4 + 1):
 		for i in range(1):
 			ai = npc.instance()
@@ -65,13 +64,11 @@ func spawn_npcs(grid_indexes):
 				SOUTH_WEST:
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE + map.ROAD_WIDTH + map.SIDEWALK_WIDTH / 2 
 					ai.position.y = map.path_y(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2				
-				SOUTH_EAST:					
+				SOUTH_EAST:
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2 
 					ai.position.y = map.path_y(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2				
 			add_child(ai)
 			avaliable_directions.pop_front()
-			amount += 1
-		print("Amount spawned: ", amount)
 			
 func spawn_infront_of_player(node, offset, direction):
 	var spawn_nodes = []
@@ -88,19 +85,19 @@ func spawn_infront_of_player(node, offset, direction):
 		):
 			spawn_nodes.append(map.path_index(int(x), int(node.y+offset)))
 	if spawn_nodes.size() > 0:
-		pass
-		#spawn_npcs(spawn_nodes)
+		print("Spawned ", spawn_nodes.size(), " npcs")
+		spawn_npcs(spawn_nodes)
 		
 func _physics_process(delta):
 	var cur_player_grid = get_player_grid()
 	if cur_player_grid.x > player_grid.x:
-		spawn_infront_of_player(cur_player_grid, 2, HORIZONTAL)
+		spawn_infront_of_player(cur_player_grid, 1, HORIZONTAL)
 	elif cur_player_grid.x < player_grid.x:
-		spawn_infront_of_player(cur_player_grid, -2, HORIZONTAL)
+		spawn_infront_of_player(cur_player_grid, -1, HORIZONTAL)
 	elif cur_player_grid.y > player_grid.y:
-		spawn_infront_of_player(cur_player_grid, 2, VERTICAL)
+		spawn_infront_of_player(cur_player_grid, 1, VERTICAL)
 	elif cur_player_grid.y < player_grid.y:
-		spawn_infront_of_player(cur_player_grid, -2, VERTICAL)
+		spawn_infront_of_player(cur_player_grid, -1, VERTICAL)
 	
 		
 	player_grid = cur_player_grid
