@@ -50,8 +50,8 @@ func spawn_npcs(grid_indexes):
 	var ai
 	for grid in grid_indexes:
 		var avaliable_directions = shuffle_list([NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST])
-		#for i in range(randi() % 4 + 1):
-		for i in range(1):
+		for i in range(randi() % 3):
+		#for i in range(1):
 			ai = npc.instance()
 			ai.init(grid)
 			match avaliable_directions.front():
