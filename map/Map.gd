@@ -129,7 +129,6 @@ func draw_intersection(index):
 
 func draw_markers(x, y, col = false):
 	var count = int((GRID_SIZE / 2 - ROAD_WIDTH - SIDEWALK_WIDTH) / MARKING_LENGTH)
-	print (count)
 	var current = 0
 	if count % 2 == 0:
 		current = -MARKING_LENGTH
