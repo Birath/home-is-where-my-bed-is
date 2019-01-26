@@ -21,4 +21,5 @@ func init():
 
 func _on_Timer_timeout():
 	print("Game overrrrrr")
-	pass # replace with function body
+	get_parent().get_node("Timer").stop()
+	get_parent().get_node("Hud").show_game_over()
