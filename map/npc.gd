@@ -64,7 +64,7 @@ func spawn_npcs(grid_indexes):
 				SOUTH_WEST:
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE + map.ROAD_WIDTH + map.SIDEWALK_WIDTH / 2 
 					ai.position.y = map.path_y(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2				
-				SOUTH_EAST:
+				SOUTH_EAST:					
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2 
 					ai.position.y = map.path_y(grid) * map.GRID_SIZE - map.ROAD_WIDTH - map.SIDEWALK_WIDTH / 2				
 			add_child(ai)
