@@ -3,7 +3,7 @@ extends KinematicBody2D
 onready var map = get_parent().map
 var sees_player = false
 var player_body
-var target_rotation
+var draw_speech_bubble = false
 
 var current_node
 var target_node
@@ -15,7 +15,7 @@ const UP = Vector2(0, -1)
 const DOWN = Vector2(0, 1)
 var direction
 var prev_direction
-var speed = 10
+var speed = 20
 
 func init(spawn_node):
 	self.current_node = spawn_node
@@ -29,33 +29,91 @@ func _draw():
 	
 	draw_rect(shoulder, shoulder_color, true)
 	draw_rect(head, head_color, true)
+	if draw_speech_bubble:
+		speech_bubble()
+
+func speech_bubble():
+	var corner_points = 10
+	var corner_radius = 0.3
+	var x = 1
+	var y = 1
+	var width = 3
+	var height = 2
+	
+	var points = PoolVector2Array()
+	
+	for i in range(corner_points+1):
+		var angle_point = i * PI/2 / corner_points - PI/2
+		points.push_back(Vector2(width-corner_radius + x, corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
+	
+	for i in range(corner_points+1):
+		var angle_point = PI/2 + i * PI/2 / corner_points - PI/2
+		points.push_back(Vector2(width-corner_radius + x, height-corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
+	
+	for i in range(corner_points+1):
+		var angle_point = PI + i * PI/2 / corner_points - PI/2
+		points.push_back(Vector2(corner_radius + x, height-corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
+	# 
+	"""
+	for i in range(corner_points+1):
+		var angle_point = 3*PI/2 + i * PI/2 / corner_points - PI/2
+		points.push_back(Vector2(corner_radius + x, corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
+	"""
+	points.push_back(Vector2(x, y - 0.5))
+	points.push_back(Vector2(x + 0.5, y))
+	draw_polygon(points, PoolColorArray([Color(1,1,1)]))
 
 func _ready():
+	randomize()
 	set_target_node()
 
-func set_target_node():
+func change_target(exlude_index):
 	var neighbour = map.path_connected_nodes(current_node)
-	if neighbour.size() == 0:
+	var i = randi() % neighbour.size()
+	while(i == exlude_index):
+		i = randi() % neighbour.size()
+	target_node = neighbour[i]
+	var target_x = map.path_x(target_node)
+	var target_y = map.path_y(target_node)
+	set_target_pos(neighbour, target_x, target_y)
+
+func set_target_node():
+	var neighbours = map.path_connected_nodes(current_node)
+	if neighbours.size() == 0:
 		self.queue_free()
 		return
-	target_node = neighbour[randi() % neighbour.size()]
+	var i = randi() % neighbours.size()
+	target_node = neighbours[i]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
 	prev_direction = direction
+	set_target_pos(neighbours, target_x, target_y, i)
 
+func set_target_pos(neighbours, target_x, target_y, i = null):
 	if target_x > map.path_x(current_node):
+		if prev_direction == LEFT and neighbours.size() > 1:
+			change_target(i)
+			return
 		direction = RIGHT
 		target_pos = Vector2(position.x + map.GRID_SIZE, position.y)
-		print(target_pos)
 	elif target_x < map.path_x(current_node):
+		if prev_direction == RIGHT and neighbours.size() > 1:
+			change_target(i)
+			return
 		direction = LEFT
 		target_pos = Vector2(position.x - map.GRID_SIZE , position.y)
 	elif target_y > map.path_y(current_node):
+		if prev_direction == UP and neighbours.size() > 1:
+			change_target(i)
+			return
 		direction = DOWN
 		target_pos = Vector2(position.x, position.y + map.GRID_SIZE)
 	else:
+		if prev_direction == DOWN and neighbours.size() > 1:
+			change_target(i)
+			return
 		direction = UP
-		target_pos = Vector2(position.x, position.y - map.GRID_SIZE)
+		target_pos = Vector2(position.x, round(position.y - map.GRID_SIZE))
 	
 func _process(delta):
 	current_node = current_node()
@@ -70,34 +128,7 @@ func _physics_process(delta):
 			move_and_slide(direction*speed)
 
 func current_node():
-	var x = 0
-	var y = 0
-	match direction:
-		RIGHT:
-			x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
-			if prev_direction == UP:
-				y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
-			elif prev_direction == DOWN:
-				y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH	
-		LEFT:
-			x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
-			if prev_direction == UP:
-				y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
-			elif prev_direction == DOWN:
-				y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
-		UP:
-			if prev_direction == RIGHT:
-				x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
-			elif prev_direction == LEFT:
-				x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH 
-			y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
-		DOWN:
-			if prev_direction == RIGHT:
-				x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
-			elif prev_direction == LEFT:
-				x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH 
-			y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
-	return map.path_index(int(round(x)) / int(map.GRID_SIZE), int(round(y)) / int(map.GRID_SIZE))
+	return map.path_index(int(round(position.x / map.GRID_SIZE)), int(round(position.y / map.GRID_SIZE)))
 
 static func lerp_angle(a, b, t):
 	if abs(a-b) >= PI:
@@ -107,8 +138,12 @@ static func lerp_angle(a, b, t):
 			b = normalize_angle(b) - 2.0 * PI
 	return lerp(a, b, t)
 
+
+	
 func interact_with():
-	print("Interacted!")
+	print("Interacted with")
+	draw_speech_bubble = true
+	update()
 
 static func normalize_angle(x):
 	return fposmod(x + PI, 2.0*PI) - PI
