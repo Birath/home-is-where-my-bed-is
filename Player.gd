@@ -52,3 +52,6 @@ func _draw():
 	
 	draw_rect(shoulder, shoulder_color, true)
 	draw_rect(head, head_color, true)
+	
+func get_rekt():
+	print("I am fucking dead ")
