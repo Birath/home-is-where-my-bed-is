@@ -23,20 +23,11 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 
-[node name="rotate" type="Tween" parent="." index="0"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
 
-[node name="vision_range" type="Area2D" parent="." index="2"]
+[node name="vision_range" type="Area2D" parent="." index="1"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
