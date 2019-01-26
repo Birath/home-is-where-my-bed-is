@@ -30,6 +30,9 @@ func get_input():
 			if body.is_in_group("npc"):
 				body.interact_with()
 				break
+		for area in $InteractArea.get_overlapping_areas():
+			if area.is_in_group("bed"):
+				print("You won!")
 
 func _physics_process(delta):
 	get_input()
