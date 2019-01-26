@@ -25,7 +25,9 @@ func _ready():
 	var spawn_grids = []
 	for row in range(right_corner.y, right_corner.y+5):
 		for col in range(right_corner.x, right_corner.x+5):
-			spawn_grids.append(map.path_index(col, row))
+			var index = map.path_index(col, row)
+			if index != -1:
+				spawn_grids.append(index)
 	spawn_npcs(spawn_grids)
 	#pawn_npcs([0])
 

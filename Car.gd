@@ -16,11 +16,14 @@ var car_type;
 var color_scheme;
 var flip_colors;
 
+var prev_direction
+
 export (int) var speed = 25
 onready var map = get_parent().map
 var direction = Vector2()
 var current_node
 var target_node
+var target_pos
 
 const RIGHT = Vector2(1, 0)
 const LEFT = Vector2(-1, 0)
@@ -43,21 +46,26 @@ func init(spawn_node, car_type):
 func set_target_node():
 	var neighbour = map.path_connected_nodes(current_node)
 	if neighbour.size() == 0:
+		self.queue_free()
 		return
 	target_node = neighbour[randi() % neighbour.size()]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
-	
-	
-	
+	prev_direction = direction
+
 	if target_x > map.path_x(current_node):
 		direction = RIGHT
+		target_pos = Vector2(position.x + map.GRID_SIZE, position.y)
+		print(target_pos)
 	elif target_x < map.path_x(current_node):
 		direction = LEFT
+		target_pos = Vector2(position.x - map.GRID_SIZE , position.y)
 	elif target_y > map.path_y(current_node):
 		direction = DOWN
+		target_pos = Vector2(position.x, position.y + map.GRID_SIZE)
 	else:
 		direction = UP
+		target_pos = Vector2(position.x, position.y - map.GRID_SIZE)
 
 func _draw():
 	for shape in cars[car_type]:
@@ -70,9 +78,35 @@ func _physics_process(delta):
 func _process(delta):
 	rotation = direction.angle() + PI / 2
 	current_node = current_node()
-	if current_node == target_node:
-		print("Reached target")
+	if position.distance_to(target_pos) < 0.1:
 		set_target_node()
 
 func current_node():
-	return map.path_index(int(round(position.x)) / int(map.GRID_SIZE), int(round(position.y)) / int(map.GRID_SIZE))
+	var x = 0
+	var y = 0
+	match direction:
+		RIGHT:
+			x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
+			if prev_direction == UP:
+				y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
+			elif prev_direction == DOWN:
+				y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH	
+		LEFT:
+			x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
+			if prev_direction == UP:
+				y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
+			elif prev_direction == DOWN:
+				y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
+		UP:
+			if prev_direction == RIGHT:
+				x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
+			elif prev_direction == LEFT:
+				x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH 
+			y = position.y - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH
+		DOWN:
+			if prev_direction == RIGHT:
+				x = position.x + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
+			elif prev_direction == LEFT:
+				x = position.x - map.SIDEWALK_WIDTH / 2 - map.ROAD_WIDTH 
+			y = position.y + map.SIDEWALK_WIDTH / 2 + map.ROAD_WIDTH
+	return map.path_index(int(round(x)) / int(map.GRID_SIZE), int(round(y)) / int(map.GRID_SIZE))

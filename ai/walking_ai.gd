@@ -42,9 +42,7 @@ func set_target_node():
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
 	prev_direction = direction
-	if prev_direction == RIGHT:
-		pass
-		
+
 	if target_x > map.path_x(current_node):
 		direction = RIGHT
 		target_pos = Vector2(position.x + map.GRID_SIZE, position.y)
@@ -57,7 +55,7 @@ func set_target_node():
 		target_pos = Vector2(position.x, position.y + map.GRID_SIZE)
 	else:
 		direction = UP
-		target_pos = Vector2(position.x, position.y - map.GRID_SIZE)		
+		target_pos = Vector2(position.x, position.y - map.GRID_SIZE)
 	
 func _process(delta):
 	current_node = current_node()
