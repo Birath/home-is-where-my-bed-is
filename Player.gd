@@ -34,11 +34,13 @@ func get_input():
 					closest_body = body
 					closest_distance = position.distance_to(body.position)
 		if closest_body != null:
-			closest_body.interact_with()		
+			closest_body.interact_with()
 				
 		for area in $InteractArea.get_overlapping_areas():
 			if area.is_in_group("bed"):
 				print("You won!")
+				get_parent().get_node("Timer").stop()
+				get_parent().get_node("Hud").show_game_won()
 
 func _physics_process(delta):
 	get_input()
@@ -61,3 +63,5 @@ func _draw():
 	
 func get_rekt():
 	print("I am fucking dead ")
+	get_parent().get_node("Timer").stop()
+	get_parent().get_node("Hud").show_game_over()
