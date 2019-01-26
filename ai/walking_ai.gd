@@ -19,22 +19,13 @@ const RIGHT = Vector2(1, 0)
 const LEFT = Vector2(-1, 0)
 const UP = Vector2(0, -1)
 const DOWN = Vector2(0, 1)
-var direction
+var velocity
 var prev_direction
 var speed = 20
+var moving = false
 
 func init(spawn_node):
 	self.current_node = spawn_node
-
-func _draw():
-	var shoulder_color = Color(randf(), randf(), randf(), 1)
-	var shoulder = Rect2(-1.25, -0.375, 2.5, 0.75)
-	
-	var head_color = shoulder_color.contrasted()
-	var head = Rect2(-0.5, -0.5, 1, 1)
-	
-	draw_rect(shoulder, shoulder_color, true)
-	draw_rect(head, head_color, true)
 
 func _ready():
 	randomize()
@@ -59,7 +50,7 @@ func set_target_node():
 	target_node = neighbours[i]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
-	prev_direction = direction
+	prev_direction = velocity
 	set_target_pos(neighbours, target_x, target_y, i)
 
 func set_target_pos(neighbours, target_x, target_y, i = null):
@@ -67,25 +58,25 @@ func set_target_pos(neighbours, target_x, target_y, i = null):
 		if prev_direction == LEFT and neighbours.size() > 1:
 			change_target(i)
 			return
-		direction = RIGHT
+		velocity = RIGHT
 		target_pos = Vector2(position.x + map.GRID_SIZE, position.y)
 	elif target_x < map.path_x(current_node):
 		if prev_direction == RIGHT and neighbours.size() > 1:
 			change_target(i)
 			return
-		direction = LEFT
+		velocity = LEFT
 		target_pos = Vector2(position.x - map.GRID_SIZE , position.y)
 	elif target_y > map.path_y(current_node):
 		if prev_direction == UP and neighbours.size() > 1:
 			change_target(i)
 			return
-		direction = DOWN
+		velocity = DOWN
 		target_pos = Vector2(position.x, position.y + map.GRID_SIZE)
 	else:
 		if prev_direction == DOWN and neighbours.size() > 1:
 			change_target(i)
 			return
-		direction = UP
+		velocity = UP
 		target_pos = Vector2(position.x, round(position.y - map.GRID_SIZE))
 	
 func _process(delta):
@@ -95,10 +86,13 @@ func _process(delta):
 
 func _physics_process(delta):
 	if sees_player:
+		moving = false
 		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
 	else:
-		if direction != null:
-			move_and_slide(direction*speed)
+		if velocity != null:
+			moving = true
+			rotation = velocity.angle() - PI / 2
+			move_and_slide(velocity*speed)
 
 func current_node():
 	return map.path_index(int(round(position.x / map.GRID_SIZE)), int(round(position.y / map.GRID_SIZE)))
