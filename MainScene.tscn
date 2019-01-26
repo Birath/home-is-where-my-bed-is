@@ -9,8 +9,8 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://enteties/Bed.tscn" type="PackedScene" id=8]
 [ext_resource path="res://hud/Hud.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Easymode.wav" type="AudioStream" id=8]
-[ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=9]
+
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -68,16 +68,5 @@ one_shot = true
 autostart = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
-
-stream = ExtResource( 8 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-script = ExtResource( 9 )
-_sections_unfolded = [ "Pause" ]
 
 
