@@ -34,7 +34,7 @@ func get_input():
 		for area in $InteractArea.get_overlapping_areas():
 			if area.is_in_group("bed"):
 				print("You won!")
-				get_parent().get_node("Timer").stop()
+				get_parent().get_node("Timer").set_paused(true)
 				get_parent().get_node("Hud").show_game_won()
 
 func _physics_process(delta):
@@ -51,5 +51,5 @@ func _process(delta):
 
 func get_rekt():
 	print("I am fucking dead ")
-	get_parent().get_node("Timer").stop()
+	get_parent().get_node("Timer").set_paused(true)
 	get_parent().get_node("Hud").show_game_over()

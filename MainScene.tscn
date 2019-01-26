@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MainScene.gd" type="Script" id=1]
 [ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://enteties/Bed.tscn" type="PackedScene" id=8]
 [ext_resource path="res://hud/Hud.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Easymode.wav" type="AudioStream" id=10]
-[ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=11]
 
 [node name="Game" type="Node2D" index="0"]
 
@@ -37,7 +35,7 @@ position = Vector2( 100, 0 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.05, 0.05 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -68,16 +66,6 @@ process_mode = 1
 wait_time = 300.0
 one_shot = true
 autostart = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
-
-stream = ExtResource( 10 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-script = ExtResource( 11 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

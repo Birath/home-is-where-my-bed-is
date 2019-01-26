@@ -6,7 +6,7 @@ func _ready():
 	$GameWonLabel.hide()
 
 func show_game_won():
-	$GameWonLabel.text += get_parent().get_node("Timer").time_left
+	$GameWonLabel.text += String(int(get_parent().get_node("Timer").time_left))
 	$GameWonLabel.show()
 	$ReplayButton.show()
 
