@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends StaticBody2D
 
 # car is defined as [[Base, is_base_layer], [Other part, is_base_layer]]
 var cars = {
@@ -38,7 +38,7 @@ func init(spawn_node, car_type):
 	self.current_node = spawn_node
 	self.car_type = car_type;
 	displacement = cars[car_type][0][0].size / 2
-	$CarArea.get_node("CarShape").shape.extents = displacement
+	$CarShape.shape.extents = displacement
 	color_scheme = car_colors[randi()%car_colors.size()]
 	flip_colors = bool(randi()%2)
 	
@@ -96,7 +96,7 @@ func _draw():
 		draw_rect(shape[0], color_scheme[int(shape[1] && flip_colors)], true)
 
 func _physics_process(delta):
-	move_and_slide(direction * speed)
+	position += direction * speed * delta
 
 func _process(delta):
 	rotation = direction.angle() + PI / 2
@@ -106,3 +106,8 @@ func _process(delta):
 
 func current_node():
 	return map.path_index(int(round(position.x / map.GRID_SIZE)), int(round(position.y / map.GRID_SIZE)))
+
+
+func _on_CarArea_body_entered(body):
+	if body.is_in_group("player"):
+		body.get_rekt()

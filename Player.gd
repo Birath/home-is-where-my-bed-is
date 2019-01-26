@@ -21,10 +21,16 @@ func get_input():
 	velocity = velocity.normalized() * speed
 
 	if Input.is_action_just_pressed('player_interact'):
+		var closest_body
+		var closest_distance = -1
 		for body in $InteractArea.get_overlapping_bodies():
 			if body.is_in_group("npc"):
-				body.interact_with()
-				break
+				if closest_body == null or position.distance_to(body.position) < closest_body:
+					closest_body = body
+					closest_distance = position.distance_to(body.position)
+		if closest_body != null:
+			closest_body.interact_with()		
+				
 		for area in $InteractArea.get_overlapping_areas():
 			if area.is_in_group("bed"):
 				print("You won!")
@@ -38,3 +44,6 @@ func _physics_process(delta):
 func _process(delta):
 	#update()
 	pass
+	
+func get_rekt():
+	print("I am fucking dead ")
