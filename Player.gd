@@ -19,6 +19,12 @@ func get_input():
 		velocity.x += 1
 	velocity = velocity.normalized() * speed
 	
+	if velocity.length() > 0:
+		if !$AnimationPlayer.is_playing():
+			$AnimationPlayer.play("Walking")
+	else:
+		$AnimationPlayer.stop()
+	
 	if Input.is_action_just_pressed('player_interact'):
 		for body in $InteractArea.get_overlapping_bodies():
 			if body.is_in_group("npc"):
@@ -28,6 +34,11 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide(velocity)
+
+
+func _process(delta):
+	#update()
+	pass
 
 func _draw():
 	var shoulder_color = Color(randf(), randf(), randf(), 1)
