@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 29.5034, 29.3025 )
+extents = Vector2( 2.5, 1 )
 
 [sub_resource type="CircleShape2D" id=2]
 
