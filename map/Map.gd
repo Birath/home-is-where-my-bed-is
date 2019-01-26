@@ -38,7 +38,7 @@ func _ready():
 	for index in range(road_grid.size()):
 		road_grid[index] = true
 	
-	road_grid[road_index(2, 1, true)] = false
+	remove_road(road_index(0, 1))
 	
 	update()
 	return
@@ -50,6 +50,11 @@ func _draw():
 	for index in range(road_grid.size()):
 		if road_grid[index]:
 			draw_road(road_x(index), road_y(index), road_direction(index))
+	for index in range(path_grid.size()):
+		for dir in range(4):
+			if path_grid[index][dir]:
+				draw_path(index, dir)
+	return
 
 func draw_road(x, y, col = false, sidewalk = false):
 	if col:
@@ -72,9 +77,19 @@ func draw_road(x, y, col = false, sidewalk = false):
 			self.draw_rect(rect, SIDEWALK_COLOR, true)
 			rect.position.y =  y * GRID_SIZE + ROAD_WIDTH
 			self.draw_rect(rect, SIDEWALK_COLOR, true)
+	return
+
+func draw_path(index, dir):
+	var x = path_x(index) * GRID_SIZE
+	var y = path_y(index) * GRID_SIZE
+	var x2 = x + int(dir == RIGHT) * GRID_SIZE / 4 - int(dir == LEFT) * GRID_SIZE / 4
+	var y2 = y + int(dir == DOWN) * GRID_SIZE / 4 - int(dir == UP) * GRID_SIZE / 4
+	
+	draw_line(Vector2(x, y), Vector2(x2, y2), Color(1, 0, 0))
+	return
 
 func path_index(x, y):
-	return x + y * (WIDTH + 1);
+	return x + y * (WIDTH + 1)
 
 func path_x(index):
 	return index % (WIDTH + 1)
@@ -98,7 +113,6 @@ func path_connected_nodes(index):
 	if path_grid[index][DOWN]:
 		connected.append(path_index(y + 1, x))
 	return connected
-
 
 func road_index(x, y, col = false):
 	var index = 0
@@ -125,18 +139,28 @@ func road_direction(index):
 func get_road(x, y, direction):
 	match(direction):
 		UP:
-			return
+			return road_index(x, y - 1, true)
 		DOWN:
-			return
+			return road_index(x, y, true)
 		LEFT:
-			return
+			return road_index(x - 1, y, false)
 		RIGHT:
-			return
-	return null
+			return road_index(x, y, false)
+	return -1
 
-
-
-
+func remove_road(index, only_from_path = false):
+	if not only_from_path:
+		road_grid[index] = false
+	
+	var dir
+	var x = road_x(index)
+	var y = road_y(index)
+	if road_direction(index): 
+		dir = DOWN
+	else:
+		dir = RIGHT
+	path_grid[path_index(x, y)][dir] = false
+	path_grid[path_index(x + int(dir == RIGHT), y + int(dir == DOWN))][(dir + 2) % 4] = false
 
 
 
