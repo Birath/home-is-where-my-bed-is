@@ -22,7 +22,7 @@ func _init(map, building, x, y):
 		"small_house" : [
 			[],
 			[Vector2(0, 0)],
-			[[Rect2(ROAD_WIDTH, ROAD_WIDTH, (GRID_SIZE - ROAD_WIDTH) * 2, (GRID_SIZE - ROAD_WIDTH) * 2), Color(0, 1, 0)]]
+			[[Rect2(ROAD_WIDTH, ROAD_WIDTH, (GRID_SIZE - ROAD_WIDTH) * 2, GRID_SIZE - ROAD_WIDTH * 2), Color(0.5, 0, 0)]]
 		]
 	}
 	
