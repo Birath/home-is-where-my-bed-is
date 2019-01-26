@@ -50,7 +50,11 @@ func _draw():
 	for index in range(road_grid.size()):
 		if road_grid[index]:
 			draw_road(road_x(index), road_y(index), road_direction(index))
-
+	var label = Label.new()
+	var font = label.get_font("")
+	for index in range(path_grid.size()):
+		draw_string(font, Vector2(path_x(index)*GRID_SIZE, path_y(index)*GRID_SIZE), str(index)) 
+	label.free()
 func draw_road(x, y, col = false, sidewalk = false):
 	if col:
 		var rect = Rect2(x * GRID_SIZE - ROAD_WIDTH, y * GRID_SIZE, ROAD_WIDTH * 2, GRID_SIZE)
@@ -90,13 +94,13 @@ func path_connected_nodes(index):
 	var y = path_y(index)
 	var connected = []
 	if path_grid[index][RIGHT]:
-		connected.append(path_index(y, x + 1))
+		connected.append(path_index(x + 1, y))
 	if path_grid[index][UP]:
-		connected.append(path_index(y - 1, x))
+		connected.append(path_index(x, y - 1))
 	if path_grid[index][LEFT]:
-		connected.append(path_index(y, x - 1))
+		connected.append(path_index(x - 1, y))
 	if path_grid[index][DOWN]:
-		connected.append(path_index(y + 1, x))
+		connected.append(path_index(x, y + 1))
 	return connected
 
 
