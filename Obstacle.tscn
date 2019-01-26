@@ -10,7 +10,7 @@ extents = Vector2( 10, 10 )
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 105.868, 67.368 )
+extents = Vector2( 51.0659, 48.0334 )
 
 [node name="Obstacle" type="StaticBody2D" index="0"]
 
