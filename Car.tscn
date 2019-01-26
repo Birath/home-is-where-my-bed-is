@@ -5,19 +5,22 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6, 4.27809 )
+extents = Vector2( 6, 4.34016 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6.08211, 11.9168 )
+extents = Vector2( 3, 3 )
 
-[node name="Car" type="KinematicBody2D"]
+[node name="Car" type="StaticBody2D"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 0
-collision/safe_margin = 0.08
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 speed = 25
@@ -47,10 +50,10 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 
-[node name="HitShape" type="CollisionShape2D" parent="." index="1"]
+[node name="CarShape" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0, -7.56928 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CarArea" type="Area2D" parent="." index="2"]
 
@@ -62,8 +65,12 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 
-[node name="CarShape" type="CollisionShape2D" parent="CarArea" index="0"]
+[node name="HitShape" type="CollisionShape2D" parent="CarArea" index="0"]
 
+position = Vector2( 0, -4 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="body_entered" from="CarArea" to="." method="_on_CarArea_body_entered"]
 
 

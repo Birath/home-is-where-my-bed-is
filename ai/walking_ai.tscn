@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ai/walking_ai.gd" type="Script" id=1]
 [ext_resource path="res://enteties/Speech Bubble.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/human.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -13,7 +14,7 @@ extents = Vector2( 1.25, 0.375 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="walking_ai" type="KinematicBody2D" index="0" groups=[
+[node name="walking_ai" type="KinematicBody2D" groups=[
 "npc",
 ]]
 
@@ -42,6 +43,8 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="vision_range" index="0"]
 
 shape = SubResource( 2 )
+
+[node name="Human" parent="." index="2" instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="vision_range" to="." method="_on_vision_range_body_entered"]
 

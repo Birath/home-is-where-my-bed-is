@@ -20,7 +20,7 @@ func _init(map, building, x, y):
 		"park" : [
 			[[Vector2(1, 1), map.RIGHT], [Vector2(1, 1), map.UP], [Vector2(1, 1), map.LEFT], [Vector2(1, 1), map.DOWN]],
 			[Vector2(0, 0), Vector2(0, 1), Vector2(1, 0), Vector2(1, 1)],
-			[[Rect2(ROAD_WIDTH, ROAD_WIDTH, (GRID_SIZE - ROAD_WIDTH) * 2, (GRID_SIZE - ROAD_WIDTH) * 2), Color(0, 1, 0), false]]
+			[[Rect2(ROAD_WIDTH, ROAD_WIDTH, (GRID_SIZE - ROAD_WIDTH) * 2, (GRID_SIZE - ROAD_WIDTH) * 2), Color("02A676")]]
 		],
 		"small_house" : [
 			[],
