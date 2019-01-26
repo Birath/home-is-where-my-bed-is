@@ -30,8 +30,9 @@ func _draw():
 	draw_rect(head, head_color, true)
 
 func _ready():
-	
-	# DEBUGGING
+	set_target_node()
+
+func set_target_node():
 	var neighbour = map.path_connected_nodes(current_node)
 	target_node = neighbour[randi() % neighbour.size()]
 	var target_x = map.path_x(target_node)
@@ -45,24 +46,23 @@ func _ready():
 		direction = DOWN
 	else:
 		direction = UP
-	
 
 func _process(delta):
+	current_node = current_node()
+	if current_node == target_node:
+		print("Reached target")
+		set_target_node()
+
+func _physics_process(delta):
 	if sees_player:
-		rotation = lerp_angle(rotation, target_rotation, delta*5)
-			#TODO something funny
-		"""		
-		if not rotate.is_active():
-			rotate.interpolate_property(self, 'rotation', 
-			rotation, rotation + position.angle_to_point(player_body.position),
-			0.5, Tween.TRANS_QUAD, Tween.EASE_IN
-			)
-			rotate.start()
-		"""
+		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
 	else:
 		pass
 		move_and_slide(direction*speed)
-	
+
+func current_node():
+	return map.path_index(int(round(position.x)) / int(map.GRID_SIZE), int(round(position.y)) / int(map.GRID_SIZE))
+
 static func lerp_angle(a, b, t):
 	if abs(a-b) >= PI:
 		if a > b:
@@ -81,8 +81,8 @@ func _on_vision_range_body_entered(body):
 	if body.is_in_group("player"):
 		player_body = body
 		sees_player = true
-		target_rotation = rotation + position.angle_to_point(player_body.position) - PI/2
-
+		#target_rotation = 
+		print(target_rotation)
 func _on_vision_range_body_exited(body):
 	if body.is_in_group("player"):
 		player_body = body

@@ -2,21 +2,17 @@
 
 [ext_resource path="res://ai/ai_test_scene.gd" type="Script" id=1]
 [ext_resource path="res://ai/walking_ai.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://map/Map.tscn" type="PackedScene" id=3]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 Ai = ExtResource( 2 )
 
-[node name="Player" parent="." index="0" instance=ExtResource( 3 )]
+[node name="Map" parent="." index="0" instance=ExtResource( 3 )]
 
-position = Vector2( 17.9737, 15.4721 )
+[node name="Camera2D" type="Camera2D" parent="." index="1"]
 
-[node name="Camera2D" type="Camera2D" parent="Player" index="3"]
-
-position = Vector2( -17.9737, -15.4721 )
-offset = Vector2( 18, 15 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -29,16 +25,15 @@ limit_smoothed = false
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = false
-smoothing_speed = 8.0
+smoothing_speed = 5.0
 offset_v = 0.0
 offset_h = 0.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-_sections_unfolded = [ "Smoothing" ]
 
 
