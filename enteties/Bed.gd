@@ -14,6 +14,8 @@ func _draw():
 	
 	
 func _ready():
+	position.x = randi() % 400
+	position.y = randi() % -400
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass

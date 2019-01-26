@@ -1,9 +1,15 @@
 extends KinematicBody2D
 
 onready var map = get_parent().map
+onready var bed = get_parent().get_parent().get_node("Bed")
+export (PackedScene) var speech_bubble
+var bubble
+
 var sees_player = false
 var player_body
 var draw_speech_bubble = false
+var interacted_with = false
+var answer
 
 var current_node
 var target_node
@@ -29,39 +35,6 @@ func _draw():
 	
 	draw_rect(shoulder, shoulder_color, true)
 	draw_rect(head, head_color, true)
-	if draw_speech_bubble:
-		speech_bubble()
-
-func speech_bubble():
-	var corner_points = 10
-	var corner_radius = 0.3
-	var x = 1
-	var y = 1
-	var width = 3
-	var height = 2
-	
-	var points = PoolVector2Array()
-	
-	for i in range(corner_points+1):
-		var angle_point = i * PI/2 / corner_points - PI/2
-		points.push_back(Vector2(width-corner_radius + x, corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
-	
-	for i in range(corner_points+1):
-		var angle_point = PI/2 + i * PI/2 / corner_points - PI/2
-		points.push_back(Vector2(width-corner_radius + x, height-corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
-	
-	for i in range(corner_points+1):
-		var angle_point = PI + i * PI/2 / corner_points - PI/2
-		points.push_back(Vector2(corner_radius + x, height-corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
-	# 
-	"""
-	for i in range(corner_points+1):
-		var angle_point = 3*PI/2 + i * PI/2 / corner_points - PI/2
-		points.push_back(Vector2(corner_radius + x, corner_radius + y) + Vector2(cos(angle_point), sin(angle_point)) * corner_radius)
-	"""
-	points.push_back(Vector2(x, y - 0.5))
-	points.push_back(Vector2(x + 0.5, y))
-	draw_polygon(points, PoolColorArray([Color(1,1,1)]))
 
 func _ready():
 	randomize()
@@ -137,13 +110,42 @@ static func lerp_angle(a, b, t):
 		else:
 			b = normalize_angle(b) - 2.0 * PI
 	return lerp(a, b, t)
-
-
 	
 func interact_with():
-	print("Interacted with")
-	draw_speech_bubble = true
-	update()
+	
+	if bubble != null:
+		return
+	if interacted_with:
+		bubble = speech_bubble.instance()
+		bubble.init(answer)
+	else:
+		var horizontal 
+		var vertical
+		bubble = speech_bubble.instance()
+		if bed.position.x > position.x:
+			horizontal = bubble.directions.RIGHT
+		elif bed.position.x < position.x:
+			horizontal = bubble.directions.LEFT
+		if bed.position.y > position.y:
+			vertical = bubble.directions.DOWN
+		else:
+			vertical = bubble.directions.UP 
+		var rand_val = rand_range(0, 1) 
+		if rand_val < 0.20:
+			bubble.init(bubble.directions.NONE)
+			answer = bubble.directions.NONE
+		elif 0.20 <= rand_val and rand_val < 0.60:
+			bubble.init(horizontal)
+			answer = horizontal
+		else:
+			bubble.init(vertical)
+			answer = vertical
+		interacted_with = true
+	bubble.position = position
+	bubble.position.y -= 3
+	bubble.rotate(PI)
+	get_parent().add_child(bubble)
+	
 
 static func normalize_angle(x):
 	return fposmod(x + PI, 2.0*PI) - PI
@@ -157,3 +159,6 @@ func _on_vision_range_body_exited(body):
 	if body.is_in_group("player"):
 		player_body = body
 		sees_player = false
+		if bubble != null:
+			bubble.queue_free()
+			bubble = null
