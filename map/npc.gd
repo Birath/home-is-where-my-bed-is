@@ -11,16 +11,6 @@ enum {
 }
 
 enum {
-	NORTH,
-	CENTER,
-	SOUTH
-}
-enum {
-	WEST,
-	EAST
-}
-
-enum {
 	NORTH_WEST,
 	NORTH_EAST,
 	SOUTH_WEST,
