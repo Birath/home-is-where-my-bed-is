@@ -51,12 +51,11 @@ func _ready():
 	for index in range(building_grid.size()):
 		building_grid[index] = true
 	
-	var park = building.new(self, "park", 0, 0)
-	$buildings.add_child(park)
+	building.new(self, "park", 0, 0)
 	
 	for index in range(building_grid.size()):
-		var sml = building.new(self, "park", 0, 0)
-		$buildings.add_child(sml)
+		if building_grid[index]:
+			building.new(self, "small_house", building_x(index), building_y(index))
 	
 	update()
 	return
