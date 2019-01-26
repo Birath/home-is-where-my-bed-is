@@ -1,12 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 2.5, 1 )
+extents = Vector2( 29.5034, 29.3025 )
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -30,13 +29,7 @@ speed = 50
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="PlayerSprite" type="Sprite" parent="." index="1"]
-
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="InteractArea" type="Area2D" parent="." index="2"]
+[node name="InteractArea" type="Area2D" parent="." index="1"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
