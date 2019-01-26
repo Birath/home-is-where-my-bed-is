@@ -21,7 +21,7 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="InteractionArea" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]

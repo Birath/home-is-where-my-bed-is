@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ai/walking_ai.gd" type="Script" id=1]
+[ext_resource path="res://enteties/Speech Bubble.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -12,7 +13,7 @@ extents = Vector2( 1.25, 0.375 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="walking_ai" type="KinematicBody2D" groups=[
+[node name="walking_ai" type="KinematicBody2D" index="0" groups=[
 "npc",
 ]]
 
@@ -22,6 +23,7 @@ collision_mask = 0
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
+speech_bubble = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
