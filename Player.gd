@@ -25,7 +25,7 @@ func get_input():
 		var closest_distance = -1
 		for body in $InteractArea.get_overlapping_bodies():
 			if body.is_in_group("npc"):
-				if closest_body == null or position.distance_to(body.position) < closest_body:
+				if closest_body == null or position.distance_to(body.position) < closest_distance:
 					closest_body = body
 					closest_distance = position.distance_to(body.position)
 		if closest_body != null:
@@ -36,8 +36,10 @@ func get_input():
 				print("You won!")
 
 func _physics_process(delta):
-	moving = velocity.length() > 0
 	get_input()
+	moving = velocity.length() > speed / 2
+	if moving:
+		rotation = velocity.angle() - PI/2
 	move_and_slide(velocity)
 
 
