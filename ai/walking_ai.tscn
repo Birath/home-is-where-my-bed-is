@@ -18,10 +18,10 @@ radius = 10.0
 
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 0
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 
 [node name="rotate" type="Tween" parent="." index="0"]
 

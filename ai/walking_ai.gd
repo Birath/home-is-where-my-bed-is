@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var rotate = get_node("rotate")
-onready var map = get_parent()
+onready var map = get_parent().map
 var sees_player = false
 var player_body
 var target_rotation
@@ -14,6 +14,7 @@ const LEFT = Vector2(-1, 0)
 const UP = Vector2(0, -1)
 const DOWN = Vector2(0, 1)
 var direction
+var speed = 10
 
 func init(spawn_node):
 	self.current_node = spawn_node
@@ -29,8 +30,10 @@ func _draw():
 	draw_rect(head, head_color, true)
 
 func _ready():
-	"""
-	target_node = rand_range(0, map.path_connected_nodes(current_node))
+	
+	# DEBUGGING
+	var neighbour = map.path_connected_nodes(current_node)
+	target_node = neighbour[randi() % neighbour.size()]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
 	
@@ -42,7 +45,7 @@ func _ready():
 		direction = DOWN
 	else:
 		direction = UP
-	"""
+	
 
 func _process(delta):
 	if sees_player:
@@ -58,7 +61,7 @@ func _process(delta):
 		"""
 	else:
 		pass
-		#move_and_slide(direction*speed)
+		move_and_slide(direction*speed)
 	
 static func lerp_angle(a, b, t):
 	if abs(a-b) >= PI:
