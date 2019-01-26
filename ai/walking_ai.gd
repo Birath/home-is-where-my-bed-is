@@ -34,6 +34,9 @@ func _ready():
 
 func set_target_node():
 	var neighbour = map.path_connected_nodes(current_node)
+	if neighbour.size() == 0:
+		self.queue_free()
+		return
 	target_node = neighbour[randi() % neighbour.size()]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
@@ -57,8 +60,8 @@ func _physics_process(delta):
 	if sees_player:
 		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
 	else:
-		pass
-		move_and_slide(direction*speed)
+		if direction != null:
+			move_and_slide(direction*speed)
 
 func current_node():
 	return map.path_index(int(round(position.x)) / int(map.GRID_SIZE), int(round(position.y)) / int(map.GRID_SIZE))

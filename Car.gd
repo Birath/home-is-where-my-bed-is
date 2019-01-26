@@ -42,6 +42,8 @@ func init(spawn_node, car_type):
 	
 func set_target_node():
 	var neighbour = map.path_connected_nodes(current_node)
+	if neighbour.size() == 0:
+		return
 	target_node = neighbour[randi() % neighbour.size()]
 	var target_x = map.path_x(target_node)
 	var target_y = map.path_y(target_node)
