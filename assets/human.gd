@@ -16,9 +16,14 @@ func _draw():
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	
 	pass
 func _physics_process(delta):
-	get_parent().velocity
+	if get_parent().moving:
+		if not $AnimationPlayer.is_playing():
+			$AnimationPlayer.play("walking_animation")
+	else:
+		$AnimationPlayer.stop()
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
