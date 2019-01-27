@@ -1,8 +1,8 @@
 extends Node2D
 
 
-const WIDTH = 5
-const HEIGHT = 5
+const WIDTH = 6
+const HEIGHT = 6
 
 const GRID_SIZE = 100.0
 
@@ -23,6 +23,7 @@ const OBSTACLE_CHANSE = 0.4
 onready var building = preload("res://map/buildings/Building.gd")
 onready var alley = preload("res://map/buildings/Alley.gd")
 onready var obstacle = preload("res://Obstacle.tscn")
+onready var wall = preload("res://map/Wall.tscn")
 
 
 var path_grid
@@ -114,8 +115,27 @@ func _ready():
 	for index in range(road_grid.size()):
 		if road_grid[index] and randf() <= OBSTACLE_CHANSE:
 			spawn_obstacle(index)
-	
+	build_walls()
 	update()
+	return
+
+
+func build_walls():
+	
+	var offset = ROAD_WIDTH + SIDEWALK_WIDTH
+
+	
+	build_wall(-GRID_SIZE, -GRID_SIZE - offset, (WIDTH + 2) * GRID_SIZE, GRID_SIZE)  # TOP
+	build_wall(-GRID_SIZE, GRID_SIZE * HEIGHT + offset, (WIDTH + 2) * GRID_SIZE, GRID_SIZE)  # BOTTOM
+	
+	build_wall(-GRID_SIZE - ROAD_WIDTH - SIDEWALK_WIDTH, -GRID_SIZE, GRID_SIZE, (HEIGHT + 2) * GRID_SIZE) # LEFT
+	build_wall(GRID_SIZE * WIDTH + ROAD_WIDTH + SIDEWALK_WIDTH, -GRID_SIZE, GRID_SIZE, (HEIGHT + 2) * GRID_SIZE) # RIGHT
+	return
+
+func build_wall(x, y, width, height):
+	var w = wall.instance()
+	w.init(x, y, width, height)
+	$walls.add_child(w)
 	return
 
 func spawn_obstacle(index):
@@ -132,9 +152,6 @@ func spawn_obstacle(index):
 	if side == 1:
 		obs.rotation += PI
 	$buildings.add_child(obs)
-	
-	var rect = Rect2(obs.position, Vector2(SIDEWALK_WIDTH, SIDEWALK_WIDTH))
-	draw_rect(rect, Color(0, 0, 0), true)
 	return
 
 func _draw():

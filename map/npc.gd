@@ -1,9 +1,11 @@
 extends Node
 export (PackedScene) var npc
+export (float) var spawn_radius
 
 onready var map = get_parent().get_node("Map")
 onready var player = get_parent().get_node("Player")
 var player_grid = Vector2(0, 0)
+var spawn_grids = []
 
 enum {
 	HORIZONTAL,
@@ -18,19 +20,9 @@ enum {
 }
 
 func _ready():
+	spawn_radius *= map.GRID_SIZE
 	player_grid = get_player_grid()
-	#player_grid = Vector2(2,2)
-	
-	var right_corner = Vector2(player_grid.x - 2, player_grid.y - 2)
-	var spawn_grids = []
-	for row in range(right_corner.y, right_corner.y+5):
-		for col in range(right_corner.x, right_corner.x+5):
-			var index = map.path_index(col, row)
-			if index != -1:
-				spawn_grids.append(index)
-	spawn_npcs(spawn_grids)
-	#spawn_npcs([0])
-
+	_on_spawn_timer_timeout()
 
 func get_player_grid():
 	var x = int(round(player.position.x)) / int(map.GRID_SIZE)
@@ -69,43 +61,17 @@ func spawn_npcs(grid_indexes):
 			add_child(ai)
 			avaliable_directions.pop_front()
 			
-func spawn_infront_of_player(node, offset, direction):
-	var spawn_nodes = []
-	if direction == HORIZONTAL:
-		for y in range(
-		  clamp(node.y-abs(offset), 0, map.HEIGHT+1), 
-		  clamp(node.y+abs(offset) + 2, 0, map.HEIGHT+1)
-		):
-			var index = map.path_index(int(node.x), int(y))
-			if index != -1:
-				spawn_nodes.append(index)
-	if direction == VERTICAL:
-		for x in range(
-		  clamp(node.x-abs(offset), 0, map.WIDTH+1), 
-		  clamp(node.x+abs(offset) + 2, 0, map.WIDTH+1)
-		):
-			var index = map.path_index(int(x), int(node.y))
-			if index != -1:
-				spawn_nodes.append(index)
-	if spawn_nodes.size() > 0:
-		spawn_npcs(spawn_nodes)
-		
 func _physics_process(delta):
-	var cur_player_grid = get_player_grid()
-	if cur_player_grid.x > player_grid.x:
-		spawn_infront_of_player(cur_player_grid, 1, HORIZONTAL)
-	elif cur_player_grid.x < player_grid.x:
-		spawn_infront_of_player(cur_player_grid, -1, HORIZONTAL)
-	elif cur_player_grid.y > player_grid.y:
-		spawn_infront_of_player(cur_player_grid, 1, VERTICAL)
-	elif cur_player_grid.y < player_grid.y:
-		spawn_infront_of_player(cur_player_grid, -1, VERTICAL)
-	
-	player_grid = cur_player_grid
+	if spawn_grids.size() > 0:
+		spawn_npcs(spawn_grids)
+		spawn_grids = []
+
 	for ai in get_tree().get_nodes_in_group("walking_npc"):
-		#var ai_node = Vector2(map.path_x(ai.current_node), map.path_y(ai.current_node))
 		if ai.position.distance_to(player.position) >= 200:
 			ai.queue_free()
-			#print("Killing ai at: ", ai.position)
-			#print("Position: ", player.position)
 
+func _on_spawn_timer_timeout():
+	for grid in range(map.path_grid.size()):
+		var coords = map.path_coords(grid)
+		if player.position.distance_to(coords * map.GRID_SIZE) < spawn_radius:
+			spawn_grids.append(grid)

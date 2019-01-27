@@ -26,6 +26,7 @@ car = ExtResource( 4 )
 
 script = ExtResource( 5 )
 npc = ExtResource( 6 )
+spawn_radius = null
 
 [node name="Player" parent="." index="3" instance=ExtResource( 7 )]
 
