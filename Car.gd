@@ -2,8 +2,8 @@ extends StaticBody2D
 
 # car is defined as [[Base, is_base_layer], [Other part, is_base_layer]]
 var cars = {
-	"sedan"		: [[Rect2(0, 0, 6, 12), true], [Rect2(0, 3.5, 6, 6), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
-	"hatchback"	: [[Rect2(0, 0, 6, 12), true], [Rect2(0, 3.5, 6, 8.5), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
+	"sedan"		: [[Rect2(0, 0, 6, 12), true], [Rect2(0.25, 3.5, 5.5, 6), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
+	"hatchback"	: [[Rect2(0, 0, 6, 12), true], [Rect2(0.25, 3.5, 5.5, 8.25), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 	"truck"		: [[Rect2(0, 0, 6, 18), true], [Rect2(-1, 4, 8, 14), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 	"bus"		: [[Rect2(0, 0, 6, 18), true], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 }
@@ -34,13 +34,21 @@ func _ready():
 	set_target_node()
 	pass
 
-func init(spawn_node, car_type):
+func init(spawn_node):
 	self.current_node = spawn_node
-	self.car_type = car_type;
+	self.car_type = cars.keys()[randi()%cars.size()]
 	displacement = cars[car_type][0][0].size / 2
+	
+	$CarShape.shape = RectangleShape2D.new()
 	$CarShape.shape.extents = displacement
 	color_scheme = car_colors[randi()%car_colors.size()]
 	flip_colors = bool(randi()%2)
+	
+	$CarArea/HitShape.shape = $CarShape.shape
+	$CarArea/HitShape.position.y -=0.5
+	
+	for shape in cars[car_type]:
+		shape[0].position -= displacement
 	
 func change_target(exlude_index):
 	var neighbour = map.path_connected_nodes(current_node)
@@ -92,8 +100,10 @@ func set_target_pos(neighbours, target_x, target_y, i = null):
 
 func _draw():
 	for shape in cars[car_type]:
-		shape[0].position -= displacement
-		draw_rect(shape[0], color_scheme[int(shape[1] && flip_colors)], true)
+		var color = shape[1]
+		if flip_colors:
+			color = !shape[1]
+		draw_rect(shape[0], color_scheme[int(color)], true)
 
 func _physics_process(delta):
 	position += direction * speed * delta

@@ -67,7 +67,6 @@ audio_bus_name = "Master"
 
 [node name="HitShape" type="CollisionShape2D" parent="CarArea" index="0"]
 
-position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
