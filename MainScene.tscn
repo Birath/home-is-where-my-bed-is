@@ -10,7 +10,7 @@
 [ext_resource path="res://enteties/Bed.tscn" type="PackedScene" id=8]
 [ext_resource path="res://hud/Hud.tscn" type="PackedScene" id=9]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
