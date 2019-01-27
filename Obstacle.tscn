@@ -10,9 +10,11 @@ extents = Vector2( 10, 10 )
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 51.0659, 48.0334 )
+extents = Vector2( 30, 30 )
 
-[node name="Obstacle" type="StaticBody2D" index="0"]
+[node name="Obstacle" type="StaticBody2D" groups=[
+"obstacle",
+]]
 
 input_pickable = false
 collision_layer = 1
