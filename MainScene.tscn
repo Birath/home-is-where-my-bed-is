@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://MainScene.gd" type="Script" id=1]
 [ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
@@ -10,9 +10,8 @@
 [ext_resource path="res://hud/Hud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Swiggity Swooty.wav" type="AudioStream" id=9]
 [ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=10]
-[ext_resource path="res://Obstacle.tscn" type="PackedScene" id=11]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -76,8 +75,6 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 script = ExtResource( 10 )
-
-[node name="Obstacle" parent="." index="7" instance=ExtResource( 11 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

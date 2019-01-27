@@ -20,12 +20,533 @@ bounce = 0.0
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Polygon2D" type="Polygon2D" parent="." index="1"]
+[node name="SmallBarrier" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 1.62377, 0.530849 )
+rotation = 0.174533
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier" index="0"]
 
 position = Vector2( -1.22545, 8.05299 )
 polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
 uv = PoolVector2Array(  )
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="SmallBarrier2" type="Node2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 6.31712, 4.03869 )
+rotation = 1.39626
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier2" index="0"]
+
+position = Vector2( -1.22545, 8.05299 )
+polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier2" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier2" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier2" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier2" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="SmallBarrier3" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 6.31712, 1.19322 )
+rotation = 1.5708
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier3" index="0"]
+
+position = Vector2( -1.22545, 8.05299 )
+polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier3" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier3" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier3" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier3" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="SmallBarrier4" type="Node2D" parent="." index="4"]
+
+editor/display_folded = true
+position = Vector2( 6.38146, -3.11786 )
+rotation = 1.5708
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier4" index="0"]
+
+position = Vector2( -1.22545, 8.05299 )
+polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier4" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier4" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier4" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier4" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="SmallBarrier5" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 6.5745, -5.98119 )
+rotation = 1.74533
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier5" index="0"]
+
+position = Vector2( -1.22545, 8.05299 )
+polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier5" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier5" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier5" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier5" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="SmallBarrier6" type="Node2D" parent="." index="6"]
+
+editor/display_folded = true
+position = Vector2( 3.16424, -0.769289 )
+rotation = 2.96706
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="SmallBarrier6" index="0"]
+
+position = Vector2( -1.22545, 8.05299 )
+polygon = PoolVector2Array( 0, 1, 4, 1, 4, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.199219, 0.191437, 0.191437, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="SmallBarrier6" index="1"]
+
+position = Vector2( -1.2244, 9.05793 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D3" type="Polygon2D" parent="SmallBarrier6" index="2"]
+
+position = Vector2( -0.287611, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D4" type="Polygon2D" parent="SmallBarrier6" index="3"]
+
+position = Vector2( 0.73245, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D5" type="Polygon2D" parent="SmallBarrier6" index="4"]
+
+position = Vector2( 1.7421, 9.04752 )
+polygon = PoolVector2Array( 0, 0, 0.5, -1, 1, -1, 0.5, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.683415, 0.769531, 0.189377, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="7"]
+
+polygon = PoolVector2Array( 1.31022, -7.18112, -0.348736, -5.56166, -0.743727, 0.442201, -0.348736, 5.53758, 1.98171, 7.15704, 2.5742, 5.69557, 2.5742, -0.940267, 2.2187, -5.20616 )
+uv = PoolVector2Array(  )
+color = Color( 0.140625, 0.105469, 0.105469, 0.674039 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
