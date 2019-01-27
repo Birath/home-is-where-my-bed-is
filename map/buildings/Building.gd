@@ -9,8 +9,11 @@ var map
 
 var building_colors = [Color("02A676"), Color("355C7D"), Color("C9463D")]
 
+var color
+
 func _init(map, building, x, y):
 	map.get_node("buildings").add_child(self)
+	self.color = building_colors[randi()%building_colors.size()]
 	self.map = map
 	self.building = building
 	self.GRID_SIZE = map.GRID_SIZE
@@ -56,5 +59,5 @@ func _draw():
 	if building == "park":
 		return
 	for shape in buildings[building][2]:
-		draw_rect(shape[0], building_colors[randi()%building_colors.size()], true)
+		draw_rect(shape[0], color, true)
 	return

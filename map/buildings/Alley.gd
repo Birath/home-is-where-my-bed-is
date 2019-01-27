@@ -7,12 +7,15 @@ const BARRIER_COLOR = Color(0.5, 0, 0)
 
 var alley_colors = [Color("02A676"), Color("355C7D"), Color("C9463D")]
 
+var color
+
 onready var shapes
 onready var bed = preload("res://enteties/Bed.tscn")
 
 
 func _init(map, road_index, spawn_bed = false):
 	map.get_node("buildings").add_child(self)
+	self.color = alley_colors[randi()%alley_colors.size()]
 	self.map = map
 	map.remove_road(road_index)
 	
@@ -48,7 +51,7 @@ func _init(map, road_index, spawn_bed = false):
 func _draw():
 	for shape in shapes:
 		if shape[1] != map.SIDEWALK_COLOR:
-			draw_rect(shape[0], alley_colors[randi()%alley_colors.size()], true)
+			draw_rect(shape[0], color, true)
 		else:
 			draw_rect(shape[0], shape[1], true)
 	return
