@@ -57,11 +57,54 @@ func _ready():
 	var x = randi() % (WIDTH - 1) 
 	var y = randi() % (HEIGHT - 1)
 	building.new(self, "park", x, y)
+	
+	### SPAWN BED ALLEY ###
+	for i in range(10):
+		if i == 9:
+			print("failed to spawn bed in " + String(i) + " attempts, consider changing width and height of map.")
+			get_tree().quit()
+		x = (randi() % (WIDTH - 2)) + 1
+		y = (randi() % (HEIGHT - 2)) + 1
+		var rotation = randi() % 4
+		var ok = false
+		if rotation == LEFT or rotation == RIGHT:
+			if building_grid[building_index(x, y)] and building_grid[building_index(x, y - 1)]:
+				ok = true
+		if rotation == UP or rotation == DOWN:
+			if building_grid[building_index(x, y)] and building_grid[building_index(x - 1, y)]:
+				ok = true
+		if ok:
+			var a = alley.new(self, road_index(x, y, rotation == UP or rotation == DOWN), true)
+			a.rotation = PI / 2 * rotation
+			if rotation == UP or rotation == DOWN:
+				a.position += Vector2(-GRID_SIZE / 2, GRID_SIZE / 2)
+				pass
+			break
+	
+	### SPAWN ALLEYS ###
+	for i in range(10):
+		x = (randi() % (WIDTH - 2)) + 1
+		y = (randi() % (HEIGHT - 1)) + 1
+		var rotation = randi() % 4
+		var ok = false
+		if rotation == LEFT or rotation == RIGHT:
+			if building_grid[building_index(x, y)] and building_grid[building_index(x, y - 1)]:
+				ok = true
+		if rotation == UP or rotation == DOWN:
+			if building_grid[building_index(x, y)] and building_grid[building_index(x - 1, y)]:
+				ok = true
+		if ok:
+			print(building_grid[building_index(x, y)])
+			print(building_grid[building_index(x, y - 1)])
+			print(building_grid[building_index(x + 1, y)])
+			var a = alley.new(self, road_index(x, y, rotation == UP or rotation == DOWN), false)
+			a.rotation = PI / 2 * rotation
+			if rotation == UP or rotation == DOWN:
+				a.position += Vector2(-GRID_SIZE / 2, GRID_SIZE / 2)
+	
 	for index in range(building_grid.size()):
 		if building_grid[index]:
 			building.new(self, "small_house", building_x(index), building_y(index))
-	
-	alley.new(self, road_index(2, 1, false), true)
 	
 	update()
 	return
