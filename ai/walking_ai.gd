@@ -26,7 +26,7 @@ const UP = Vector2(0, -1)
 const DOWN = Vector2(0, 1)
 var velocity
 var prev_direction
-var speed = 20
+var speed = 10
 var moving = false
 
 func init(spawn_node):
