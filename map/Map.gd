@@ -152,9 +152,6 @@ func spawn_obstacle(index):
 	if side == 1:
 		obs.rotation += PI
 	$buildings.add_child(obs)
-	
-	var rect = Rect2(obs.position, Vector2(SIDEWALK_WIDTH, SIDEWALK_WIDTH))
-	draw_rect(rect, Color(0, 0, 0), true)
 	return
 
 func _draw():
