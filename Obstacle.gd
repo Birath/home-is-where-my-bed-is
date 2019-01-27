@@ -27,7 +27,7 @@ func _ready():
 	if obstacle_type == "barrier":
 		var bar = load("res://enteties/obstacles/Barrier.tscn").instance()
 		self.add_child(bar)
-		$ObstacleShape.shape = hool.get_child(0).shape
+		$ObstacleShape.shape = bar.get_child(0).shape
 		return
 
 	displacement = obstacle_bounds.size / 2
