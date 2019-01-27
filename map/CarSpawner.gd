@@ -59,8 +59,7 @@ func spawn_cars(grid_indexes):
 	var ai
 	for grid in grid_indexes:
 		var avaliable_directions = shuffle_list([NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST])
-		#for i in range(randi() % 4 + 1):
-		for i in range(1):
+		for i in range(randi() % 2 + 1):
 			ai = car.instance()
 			ai.init(grid, "sedan")
 			match avaliable_directions.front():
@@ -86,27 +85,30 @@ func spawn_infront_of_player(node, offset, direction):
 		  clamp(node.y-abs(offset), 0, map.HEIGHT+1), 
 		  clamp(node.y+abs(offset), 0, map.HEIGHT+1)
 		):
-			spawn_nodes.append(map.path_index(int(node.x+offset), int(y)))
+			var index = map.path_index(int(node.x+offset), int(y))
+			if index != -1:
+				spawn_nodes.append(index)
 	if direction == VERTICAL:
 		for x in range(
 		  clamp(node.x-abs(offset), 0, map.WIDTH+1), 
 		  clamp(node.x+abs(offset), 0, map.WIDTH+1)
 		):
-			spawn_nodes.append(map.path_index(int(x), int(node.y+offset)))
+			var index = map.path_index(int(x), int(node.y+offset))
+			if index != -1:
+				spawn_nodes.append(index)
 	if spawn_nodes.size() > 0:
-		pass
-		#spawn_cars(spawn_nodes)
+		spawn_cars(spawn_nodes)
 		
 func _physics_process(delta):
 	var cur_player_grid = get_player_grid()
 	if cur_player_grid.x > player_grid.x:
-		spawn_infront_of_player(cur_player_grid, 2, HORIZONTAL)
+		spawn_infront_of_player(cur_player_grid, 1, HORIZONTAL)
 	elif cur_player_grid.x < player_grid.x:
-		spawn_infront_of_player(cur_player_grid, -2, HORIZONTAL)
+		spawn_infront_of_player(cur_player_grid, -1, HORIZONTAL)
 	elif cur_player_grid.y > player_grid.y:
-		spawn_infront_of_player(cur_player_grid, 2, VERTICAL)
+		spawn_infront_of_player(cur_player_grid, 1, VERTICAL)
 	elif cur_player_grid.y < player_grid.y:
-		spawn_infront_of_player(cur_player_grid, -2, VERTICAL)
+		spawn_infront_of_player(cur_player_grid, -1, VERTICAL)
 	
 		
 	player_grid = cur_player_grid
