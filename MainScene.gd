@@ -1,6 +1,7 @@
 extends Node2D
 
 var game_time = 120
+var bed
 
 func _ready():
 	init()

@@ -1,8 +1,8 @@
 extends Node2D
 
 
-const WIDTH = 3
-const HEIGHT = 3
+const WIDTH = 5
+const HEIGHT = 5
 
 const GRID_SIZE = 100.0
 
@@ -19,6 +19,7 @@ const MARKING_WIDTH = 0.8
 const MARKING_COLOR = Color(0.9, 0.9, 0.9)
 
 onready var building = preload("res://map/buildings/Building.gd")
+onready var alley = preload("res://map/buildings/Alley.gd")
 
 var path_grid
 var road_grid
@@ -51,11 +52,16 @@ func _ready():
 	for index in range(building_grid.size()):
 		building_grid[index] = true
 	
-	building.new(self, "park", 0, 0)
 	
+	
+	var x = randi() % (WIDTH - 1) 
+	var y = randi() % (HEIGHT - 1)
+	building.new(self, "park", x, y)
 	for index in range(building_grid.size()):
 		if building_grid[index]:
 			building.new(self, "small_house", building_x(index), building_y(index))
+	
+	alley.new(self, road_index(2, 1, false), true)
 	
 	update()
 	return

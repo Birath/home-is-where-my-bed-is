@@ -1,7 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MenuScene.gd" type="Script" id=1]
 [ext_resource path="res://hud/Poppins-Medium.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 32
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 40
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -19,7 +35,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -31,7 +47,62 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="GameTitle" type="Label" parent="MenuCanvas" index="0"]
+[node name="QuitButton" type="Button" parent="MenuCanvas" index="0"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -82.0
+margin_right = 39.0
+margin_bottom = -30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="InfoLabel" type="Label" parent="MenuCanvas" index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -329.0
+margin_top = -166.0
+margin_right = 329.0
+margin_bottom = 126.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "An evil snail has stolen your bed!
+Find it before bedtime!
+Ask the nice citizens for help,
+but watch out for cars!
+Good luck!"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="GameTitle" type="Label" parent="MenuCanvas" index="2"]
 
 anchor_left = 0.5
 anchor_top = 0.0
@@ -55,16 +126,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="PlayButton" type="Button" parent="MenuCanvas" index="1"]
+[node name="PlayButton" type="Button" parent="MenuCanvas" index="3"]
 
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -39.5
-margin_top = -26.0
-margin_right = 39.5
-margin_bottom = 26.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -162.0
+margin_right = 39.0
+margin_bottom = -110.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -81,6 +152,8 @@ text = "Play"
 flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
+
+[connection signal="pressed" from="MenuCanvas/QuitButton" to="." method="_on_QuitButton_pressed"]
 
 [connection signal="pressed" from="MenuCanvas/PlayButton" to="." method="_on_PlayButton_pressed"]
 
