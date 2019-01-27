@@ -5,10 +5,14 @@ export (int) var speed = 50;
 var velocity = Vector2()
 var moving = false
 
+var allow_input = true
+
 func _ready():
 	pass
 
 func get_input():
+	if not allow_input:
+		return
 	velocity = Vector2()
 	if Input.is_action_pressed('player_up'):
 		velocity.y -= 1
@@ -33,6 +37,7 @@ func get_input():
 
 		for area in $InteractArea.get_overlapping_areas():
 			if area.is_in_group("bed"):
+				hide_player()
 				print("You won!")
 				get_parent().get_node("Timer").set_paused(true)
 				get_parent().get_node("Hud").show_game_won()
@@ -46,10 +51,17 @@ func _physics_process(delta):
 
 
 func _process(delta):
-	#update()
 	pass
 
 func get_rekt():
+	hide_player()
 	print("I am fucking dead ")
 	get_parent().get_node("Timer").set_paused(true)
 	get_parent().get_node("Hud").show_game_over()
+
+func hide_player():
+	allow_input = false
+	$PlayerShape.disabled = true
+	self.visible = false
+	velocity = Vector2(0, 0)
+	
