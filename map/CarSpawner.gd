@@ -62,7 +62,7 @@ func spawn_cars(grid_indexes):
 		#for i in range(randi() % 4 + 1):
 		for i in range(1):
 			ai = car.instance()
-			ai.init(grid, "sedan")
+			ai.init(grid)
 			match avaliable_directions.front():
 				NORTH_WEST:
 					ai.position.x = map.path_x(grid) * map.GRID_SIZE + map.ROAD_WIDTH / 2 
