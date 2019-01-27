@@ -26,6 +26,14 @@ car = ExtResource( 4 )
 
 script = ExtResource( 5 )
 npc = ExtResource( 6 )
+spawn_radius = 1.5
+
+[node name="spawn_timer" type="Timer" parent="npc" index="0"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = true
 
 [node name="Player" parent="." index="3" instance=ExtResource( 7 )]
 
@@ -36,7 +44,7 @@ position = Vector2( 100, 0 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 0.05, 0.05 )
+zoom = Vector2( 0.2, 0.2 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -75,6 +83,8 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 script = ExtResource( 10 )
+
+[connection signal="timeout" from="npc/spawn_timer" to="npc" method="_on_spawn_timer_timeout"]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
