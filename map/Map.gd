@@ -165,13 +165,13 @@ func _draw():
 	for index in range(path_grid.size()):
 		for dir in range(4):
 			if path_grid[index][dir]:
-				draw_path(index, dir)
+				#draw_path(index, dir)
+				pass
 
 	var label = Label.new()
 	var font = label.get_font("")
 	for index in range(path_grid.size()):
 		pass
-		#draw_string(font, Vector2(path_x(index)*GRID_SIZE, path_y(index)*GRID_SIZE), str(index)) 
 	label.free()
 	return
 

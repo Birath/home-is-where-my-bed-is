@@ -7,6 +7,7 @@ func _ready():
 	init()
 
 func init():
+	randomize()
 	$Timer.wait_time = game_time
 	$Timer.start()
 
