@@ -50,8 +50,7 @@ func spawn_npcs(grid_indexes):
 	var ai
 	for grid in grid_indexes:
 		var avaliable_directions = shuffle_list([NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST])
-		#for i in range(randi() % 4 + 1):
-		for i in range(1):
+		for i in range(randi() % 2 + 1):
 			ai = npc.instance()
 			ai.init(grid)
 			match avaliable_directions.front():
@@ -75,17 +74,20 @@ func spawn_infront_of_player(node, offset, direction):
 	if direction == HORIZONTAL:
 		for y in range(
 		  clamp(node.y-abs(offset), 0, map.HEIGHT+1), 
-		  clamp(node.y+abs(offset), 0, map.HEIGHT+1)
+		  clamp(node.y+abs(offset) + 1, 0, map.HEIGHT+1)
 		):
-			spawn_nodes.append(map.path_index(int(node.x+offset), int(y)))
+			var index = map.path_index(int(node.x+offset), int(y))
+			if index != -1:
+				spawn_nodes.append(index)
 	if direction == VERTICAL:
 		for x in range(
 		  clamp(node.x-abs(offset), 0, map.WIDTH+1), 
-		  clamp(node.x+abs(offset), 0, map.WIDTH+1)
+		  clamp(node.x+abs(offset) + 1, 0, map.WIDTH+1)
 		):
-			spawn_nodes.append(map.path_index(int(x), int(node.y+offset)))
+			var index = map.path_index(int(x), int(node.y+offset))
+			if index != -1:
+				spawn_nodes.append(index)
 	if spawn_nodes.size() > 0:
-		print("Spawned ", spawn_nodes.size(), " npcs")
 		spawn_npcs(spawn_nodes)
 		
 func _physics_process(delta):

@@ -15,6 +15,10 @@ var current_node
 var target_node
 var target_pos
 
+var avoid_obstacle = false
+var avoid_direction
+var avoid_target
+
 const RIGHT = Vector2(1, 0)
 const LEFT = Vector2(-1, 0)
 const UP = Vector2(0, -1)
@@ -88,7 +92,15 @@ func _physics_process(delta):
 	if sees_player:
 		moving = false
 		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
+	if avoid_obstacle:
+		if position.distance_to(avoid_target) < 0.1:
+			avoid_obstacle = false
+		else:
+			moving = true
+			rotation = avoid_direction.angle() - PI / 2
+			move_and_slide(avoid_direction * speed)
 	else:
+		print(velocity)
 		if velocity != null:
 			moving = true
 			rotation = velocity.angle() - PI / 2
@@ -143,10 +155,29 @@ func interact_with():
 static func normalize_angle(x):
 	return fposmod(x + PI, 2.0*PI) - PI
 
+func get_avoid_direction():
+	if velocity in [RIGHT, LEFT]:
+		if position.y > map.path_y(target_node):
+			avoid_direction = DOWN
+			avoid_target = Vector2(position.x, position.y + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
+		else:
+			avoid_direction = UP
+			avoid_target = Vector2(position.x, position.y - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH)
+	else:
+		if position.x > map.path_x(target_node):
+			avoid_target = Vector2(position.x - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH, position.y)
+			avoid_direction = LEFT
+		else:
+			avoid_target = Vector2(position.x + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH, position.y)			
+			avoid_direction = RIGHT
+
 func _on_vision_range_body_entered(body):
 	if body.is_in_group("player"):
 		player_body = body
 		sees_player = true
+	if body.is_in_group("obstacle"):
+		get_avoid_direction()
+		avoid_obstacle = true
 		
 func _on_vision_range_body_exited(body):
 	if body.is_in_group("player"):

@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var Ai
+onready var map = get_node("Map")
 
 # class member variables go here, for example:
 # var a = 2
@@ -9,7 +10,7 @@ export (PackedScene) var Ai
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	randomize()
+	#randomize()
 	#for i in range(0, 4):
 		#var ai = Ai.instance()
 		#add_child(ai)
@@ -23,7 +24,7 @@ func _ready():
 	ai = Ai.instance()
 	ai.init(0)
 	add_child(ai)
-	ai.position = Vector2(5, -10)
+	ai.position = Vector2(12.5, -10)
 	ai.add_to_group("Player")
 		
 	pass
