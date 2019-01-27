@@ -159,15 +159,20 @@ func get_avoid_direction():
 		if position.y > map.path_y(target_node):
 			avoid_direction = DOWN
 			avoid_target = Vector2(position.x, position.y + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
+			target_pos.y += map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH
 		else:
 			avoid_direction = UP
 			avoid_target = Vector2(position.x, position.y - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH)
+			target_pos.y -= (map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
+			
 	else:
 		if position.x > map.path_x(target_node):
 			avoid_target = Vector2(position.x - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH, position.y)
+			target_pos.x -= (map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
 			avoid_direction = LEFT
 		else:
 			avoid_target = Vector2(position.x + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH, position.y)			
+			target_pos.x += map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH
 			avoid_direction = RIGHT
 
 func _on_vision_range_body_entered(body):
