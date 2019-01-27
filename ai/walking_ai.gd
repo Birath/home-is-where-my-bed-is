@@ -10,6 +10,7 @@ var player_body
 var draw_speech_bubble = false
 var interacted_with = false
 var answer
+var question_mark_chance = 0.2
 
 var current_node
 var target_node
@@ -29,6 +30,7 @@ var speed = 20
 var moving = false
 
 func init(spawn_node):
+	speed * rand_range(0.9, 1.5)
 	self.current_node = spawn_node
 
 func _ready():
@@ -144,10 +146,10 @@ func interact_with():
 		else:
 			vertical = bubble.directions.UP 
 		var rand_val = rand_range(0, 1) 
-		if rand_val < 0.20:
+		if rand_val < question_mark_chance:
 			bubble.init(bubble.directions.NONE)
 			answer = bubble.directions.NONE
-		elif 0.20 <= rand_val and rand_val < 0.60:
+		elif question_mark_chance <= rand_val and rand_val < 0.60:
 			bubble.init(horizontal)
 			answer = horizontal
 		else:

@@ -35,6 +35,7 @@ func _ready():
 	pass
 
 func init(spawn_node):
+	speed = speed * rand_range(0.9, 1.5)
 	self.current_node = spawn_node
 	self.car_type = cars.keys()[randi()%cars.size()]
 	displacement = cars[car_type][0][0].size / 2
@@ -111,7 +112,7 @@ func _physics_process(delta):
 func _process(delta):
 	rotation = direction.angle() + PI / 2
 	current_node = current_node()
-	if position.distance_to(target_pos) < 0.1:
+	if position.distance_to(target_pos) < 0.5:
 		set_target_node()
 
 func current_node():
