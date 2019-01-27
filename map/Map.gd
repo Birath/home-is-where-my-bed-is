@@ -66,6 +66,8 @@ func _ready():
 		x = (randi() % (WIDTH - 2)) + 1
 		y = (randi() % (HEIGHT - 2)) + 1
 		var rotation = randi() % 4
+		if not road_grid[road_index(x, y, rotation == UP or rotation == DOWN)]:
+			continue
 		var ok = false
 		if rotation == LEFT or rotation == RIGHT:
 			if building_grid[building_index(x, y)] and building_grid[building_index(x, y - 1)]:
@@ -78,7 +80,6 @@ func _ready():
 			a.rotation = PI / 2 * rotation
 			if rotation == UP or rotation == DOWN:
 				a.position += Vector2(-GRID_SIZE / 2, GRID_SIZE / 2)
-				pass
 			break
 	
 	### SPAWN ALLEYS ###
@@ -86,7 +87,10 @@ func _ready():
 		x = (randi() % (WIDTH - 2)) + 1
 		y = (randi() % (HEIGHT - 1)) + 1
 		var rotation = randi() % 4
+		if not road_grid[road_index(x, y, rotation == UP or rotation == DOWN)]:
+			continue
 		var ok = false
+		
 		if rotation == LEFT or rotation == RIGHT:
 			if building_grid[building_index(x, y)] and building_grid[building_index(x, y - 1)]:
 				ok = true
@@ -94,9 +98,6 @@ func _ready():
 			if building_grid[building_index(x, y)] and building_grid[building_index(x - 1, y)]:
 				ok = true
 		if ok:
-			print(building_grid[building_index(x, y)])
-			print(building_grid[building_index(x, y - 1)])
-			print(building_grid[building_index(x + 1, y)])
 			var a = alley.new(self, road_index(x, y, rotation == UP or rotation == DOWN), false)
 			a.rotation = PI / 2 * rotation
 			if rotation == UP or rotation == DOWN:
@@ -173,6 +174,11 @@ func draw_intersection(index):
 	draw_sidewalk(x * GRID_SIZE - offset, y * GRID_SIZE, true, road_sides[2])
 	draw_sidewalk(x * GRID_SIZE + offset, y * GRID_SIZE, true, road_sides[3])
 	
+	offset = ROAD_WIDTH + SIDEWALK_WIDTH / 2
+	draw_corner(x * GRID_SIZE - offset, y * GRID_SIZE - offset)
+	draw_corner(x * GRID_SIZE - offset, y * GRID_SIZE + offset)
+	draw_corner(x * GRID_SIZE + offset, y * GRID_SIZE - offset)
+	draw_corner(x * GRID_SIZE + offset, y * GRID_SIZE + offset)
 	return
 
 func draw_markers(x, y, col = false):
@@ -220,6 +226,11 @@ func draw_sidewalk(x, y, col = false, road = false):
 			draw_crossing_marking(x - current * int(not col) , y - current * coli, col)
 	else:
 		draw_rect(rect, SIDEWALK_COLOR, true)
+	return
+
+func draw_corner(x, y):
+	var rect = Rect2(x - SIDEWALK_WIDTH / 2, y - SIDEWALK_WIDTH / 2, SIDEWALK_WIDTH, SIDEWALK_WIDTH)
+	draw_rect(rect, SIDEWALK_COLOR, true)
 	return
 
 func draw_crossing_marking(x, y, col = false):
