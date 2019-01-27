@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/Swiggity Swooty.wav" type="AudioStream" id=9]
 [ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=10]
 
-[node name="Game" type="Node2D" index="0"]
+[node name="Game" type="Node2D"]
 
 script = ExtResource( 1 )
 
