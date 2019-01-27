@@ -7,6 +7,8 @@ var buildings
 var building
 var map
 
+var building_colors = [Color("02A676"), Color("355C7D"), Color("C9463D")]
+
 func _init(map, building, x, y):
 	map.get_node("buildings").add_child(self)
 	self.map = map
@@ -54,5 +56,5 @@ func _draw():
 	if building == "park":
 		return
 	for shape in buildings[building][2]:
-		draw_rect(shape[0], shape[1], true)
+		draw_rect(shape[0], building_colors[randi()%building_colors.size()], true)
 	return
