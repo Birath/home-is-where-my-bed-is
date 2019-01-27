@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://hud/Hud.gd" type="Script" id=1]
 [ext_resource path="res://hud/Poppins-Medium.ttf" type="DynamicFontData" id=2]
@@ -20,6 +20,14 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 size = 32
 use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 32
+use_mipmaps = true
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
@@ -101,7 +109,34 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="GameOverLabel" type="Label" parent="." index="2"]
+[node name="MenuButton" type="Button" parent="." index="2"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = 54.0
+margin_right = 110.0
+margin_bottom = 106.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit To Menu"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="GameOverLabel" type="Label" parent="." index="3"]
 
 anchor_left = 0.5
 anchor_top = 0.5
@@ -124,7 +159,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="GameWonLabel" type="Label" parent="." index="3"]
+[node name="GameWonLabel" type="Label" parent="." index="4"]
 
 anchor_left = 0.5
 anchor_top = 0.5
@@ -150,7 +185,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="4"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="5"]
 
 stream = ExtResource( 4 )
 volume_db = 0.0
@@ -160,7 +195,7 @@ mix_target = 0
 bus = "Master"
 script = ExtResource( 5 )
 
-[node name="Victory" type="AudioStreamPlayer" parent="." index="5"]
+[node name="Victory" type="AudioStreamPlayer" parent="." index="6"]
 
 stream = ExtResource( 6 )
 volume_db = 0.0
@@ -169,7 +204,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="Defeat" type="AudioStreamPlayer" parent="." index="6"]
+[node name="Defeat" type="AudioStreamPlayer" parent="." index="7"]
 
 stream = ExtResource( 7 )
 volume_db = 0.0
@@ -179,5 +214,7 @@ mix_target = 0
 bus = "Master"
 
 [connection signal="pressed" from="ReplayButton" to="." method="_on_ReplayButton_pressed"]
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_MenuButton_pressed"]
 
 
