@@ -5,7 +5,7 @@ var cars = {
 	"sedan"		: [[Rect2(0, 0, 6, 12), true], [Rect2(0.25, 3.5, 5.5, 6), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 	"hatchback"	: [[Rect2(0, 0, 6, 12), true], [Rect2(0.25, 3.5, 5.5, 8.25), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 	"truck"		: [[Rect2(0, 0, 6, 18), true], [Rect2(-1, 4, 8, 14), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
-	"bus"		: [[Rect2(0, 0, 6, 18), true], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
+	"bus"		: [[Rect2(0, 0, 6, 18), true], [Rect2(0.25, 0.25, 5.5, 17.5), false], [Rect2(1, -0.5, 1, 0.5), true], [Rect2(4, -0.5, 1, 0.5), true]],
 }
 
 # Cars have two colors, we randomly pick from this list
