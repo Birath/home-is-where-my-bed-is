@@ -18,8 +18,12 @@ const MARKING_LENGTH = 3
 const MARKING_WIDTH = 0.8
 const MARKING_COLOR = Color(0.9, 0.9, 0.9)
 
+const OBSTACLE_CHANSE = 0.4
+
 onready var building = preload("res://map/buildings/Building.gd")
 onready var alley = preload("res://map/buildings/Alley.gd")
+onready var obstacle = preload("res://Obstacle.tscn")
+
 
 var path_grid
 var road_grid
@@ -107,7 +111,30 @@ func _ready():
 		if building_grid[index]:
 			building.new(self, "small_house", building_x(index), building_y(index))
 	
+	for index in range(road_grid.size()):
+		if road_grid[index] and randf() <= OBSTACLE_CHANSE:
+			spawn_obstacle(index)
+	
 	update()
+	return
+
+func spawn_obstacle(index):
+	var side = randi() % 2
+	var obs = obstacle.instance()
+	obs.position += Vector2(road_x(index) * GRID_SIZE, road_y(index) * GRID_SIZE)
+	var offset = (ROAD_WIDTH + SIDEWALK_WIDTH / 2) * (1 - 2 * side)
+	
+	if road_direction(index):
+		obs.position += Vector2(offset, GRID_SIZE / 2)
+	else:
+		obs.rotation += PI / 2
+		obs.position += Vector2(GRID_SIZE / 2, offset)
+	if side == 1:
+		obs.rotation += PI
+	$buildings.add_child(obs)
+	
+	var rect = Rect2(obs.position, Vector2(SIDEWALK_WIDTH, SIDEWALK_WIDTH))
+	draw_rect(rect, Color(0, 0, 0), true)
 	return
 
 func _draw():
@@ -130,7 +157,7 @@ func _draw():
 		#draw_string(font, Vector2(path_x(index)*GRID_SIZE, path_y(index)*GRID_SIZE), str(index)) 
 	label.free()
 	return
-	
+
 func draw_road(x, y, col = false):
 	if col:
 		var rect = Rect2(x * GRID_SIZE - ROAD_WIDTH, y * GRID_SIZE + ROAD_WIDTH, ROAD_WIDTH * 2, GRID_SIZE - ROAD_WIDTH * 2)
