@@ -3,6 +3,7 @@ extends "res://ai/walking_ai.gd"
 
 func _on_ready():
 	pass
+	question_mark_chance = 0
 
 
 func _on_process():

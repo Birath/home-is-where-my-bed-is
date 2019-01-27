@@ -10,6 +10,7 @@ var player_body
 var draw_speech_bubble = false
 var interacted_with = false
 var answer
+var question_mark_chance = 0.2
 
 var current_node
 var target_node
@@ -29,6 +30,7 @@ var speed = 20
 var moving = false
 
 func init(spawn_node):
+	speed * rand_range(0.9, 1.5)
 	self.current_node = spawn_node
 
 func _ready():
@@ -144,10 +146,10 @@ func interact_with():
 		else:
 			vertical = bubble.directions.UP 
 		var rand_val = rand_range(0, 1) 
-		if rand_val < 0.20:
+		if rand_val < question_mark_chance:
 			bubble.init(bubble.directions.NONE)
 			answer = bubble.directions.NONE
-		elif 0.20 <= rand_val and rand_val < 0.60:
+		elif question_mark_chance <= rand_val and rand_val < 0.60:
 			bubble.init(horizontal)
 			answer = horizontal
 		else:
@@ -165,17 +167,18 @@ static func normalize_angle(x):
 
 func get_avoid_direction():
 	if velocity in [RIGHT, LEFT]:
-		if position.y > map.path_y(target_node):
-			avoid_direction = DOWN
-			avoid_target = Vector2(position.x, position.y + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
-			target_pos.y += map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH
-		else:
+		if position.y > map.path_y(target_node) * map.GRID_SIZE:
 			avoid_direction = UP
 			avoid_target = Vector2(position.x, position.y - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH)
 			target_pos.y -= (map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
+		
+		else:
+			avoid_direction = DOWN
+			avoid_target = Vector2(position.x, position.y + map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
+			target_pos.y += map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH
 			
 	else:
-		if position.x > map.path_x(target_node):
+		if position.x >  map.path_x(target_node) * map.GRID_SIZE:
 			avoid_target = Vector2(position.x - map.ROAD_WIDTH * 2 - map.SIDEWALK_WIDTH, position.y)
 			target_pos.x -= (map.ROAD_WIDTH * 2 + map.SIDEWALK_WIDTH)
 			avoid_direction = LEFT
