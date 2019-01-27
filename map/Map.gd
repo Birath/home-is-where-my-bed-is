@@ -115,7 +115,6 @@ func _ready():
 	for index in range(road_grid.size()):
 		if road_grid[index] and randf() <= OBSTACLE_CHANSE:
 			spawn_obstacle(index)
-	build_walls()
 	update()
 	return
 
