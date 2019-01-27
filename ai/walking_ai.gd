@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var map = get_parent().map
-onready var bed = get_parent().get_parent().get_node("Bed")
+onready var bed = get_node("/root/Game").bed
 export (PackedScene) var speech_bubble
 var bubble
 
@@ -106,7 +106,6 @@ static func lerp_angle(a, b, t):
 	return lerp(a, b, t)
 	
 func interact_with():
-	
 	if bubble != null:
 		return
 	if interacted_with:
@@ -116,11 +115,11 @@ func interact_with():
 		var horizontal 
 		var vertical
 		bubble = speech_bubble.instance()
-		if bed.position.x > position.x:
+		if bed.global_position.x > global_position.x:
 			horizontal = bubble.directions.RIGHT
-		elif bed.position.x < position.x:
+		elif bed.global_position.x < global_position.x:
 			horizontal = bubble.directions.LEFT
-		if bed.position.y > position.y:
+		if bed.global_position.y > global_position.y:
 			vertical = bubble.directions.DOWN
 		else:
 			vertical = bubble.directions.UP 
@@ -139,7 +138,7 @@ func interact_with():
 	bubble.position.y -= 3
 	bubble.rotate(PI)
 	get_parent().add_child(bubble)
-	
+	$Oomph.playing = true
 
 static func normalize_angle(x):
 	return fposmod(x + PI, 2.0*PI) - PI

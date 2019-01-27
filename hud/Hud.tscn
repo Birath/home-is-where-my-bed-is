@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://hud/Hud.gd" type="Script" id=1]
 [ext_resource path="res://hud/Poppins-Medium.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://hud/TimeLabel.gd" type="Script" id=3]
+[ext_resource path="res://assets/Swiggity Swooty.wav" type="AudioStream" id=4]
+[ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=5]
+[ext_resource path="res://assets/Victory sylt.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/DEATH.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -145,6 +149,34 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
+
+[node name="Music" type="AudioStreamPlayer" parent="." index="4"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
+script = ExtResource( 5 )
+
+[node name="Victory" type="AudioStreamPlayer" parent="." index="5"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Defeat" type="AudioStreamPlayer" parent="." index="6"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="pressed" from="ReplayButton" to="." method="_on_ReplayButton_pressed"]
 

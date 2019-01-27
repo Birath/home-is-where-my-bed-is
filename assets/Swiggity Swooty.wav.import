@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Swiggity Swooty.wav-41e9ed9e2c91d5d91d321d5df29bff71.sample"
+
+[deps]
+
+source_file="res://assets/Swiggity Swooty.wav"
+dest_files=[ "res://.import/Swiggity Swooty.wav-41e9ed9e2c91d5d91d321d5df29bff71.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

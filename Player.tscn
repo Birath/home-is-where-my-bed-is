@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/human.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/DEATH.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -11,7 +12,7 @@ extents = Vector2( 1.25, 0.5 )
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 10.0
+radius = 5.0
 
 [node name="Player" type="KinematicBody2D" index="0" groups=[
 "player",
@@ -23,7 +24,7 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform" ]
-speed = 50
+speed = 25
 
 [node name="PlayerShape" type="CollisionShape2D" parent="." index="0"]
 
@@ -46,5 +47,14 @@ shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Human" parent="." index="2" instance=ExtResource( 2 )]
+
+[node name="Death" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 
