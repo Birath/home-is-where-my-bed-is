@@ -100,7 +100,6 @@ func _physics_process(delta):
 			rotation = avoid_direction.angle() - PI / 2
 			move_and_slide(avoid_direction * speed)
 	else:
-		print(velocity)
 		if velocity != null:
 			moving = true
 			rotation = velocity.angle() - PI / 2
