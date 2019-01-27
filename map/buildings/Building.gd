@@ -34,6 +34,11 @@ func _init(map, building, x, y):
 	for grid in buildings[building][1]:
 		map.building_occupy(map.building_index(grid.x + x, grid.y + y))
 	
+	if building == "park":
+		var park = load("res://map/buildings/Park.tscn")
+		var park_instance = park.instance()
+		self.add_child(park_instance)
+		return
 	for shape in buildings[building][2]:
 		if shape[2]:
 			var c = CollisionShape2D.new()
@@ -46,6 +51,8 @@ func _init(map, building, x, y):
 	return
 
 func _draw():
+	if building == "park":
+		return
 	for shape in buildings[building][2]:
 		draw_rect(shape[0], shape[1], true)
 	return

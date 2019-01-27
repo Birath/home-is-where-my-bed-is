@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var map = get_parent().map
+onready var map = get_node("/root/Game/Map")
 onready var bed = get_node("/root/Game").bed
 export (PackedScene) var speech_bubble
 var bubble
@@ -32,9 +32,11 @@ func init(spawn_node):
 	self.current_node = spawn_node
 
 func _ready():
-	randomize()
-	set_target_node()
+	_on_ready()
 
+func _on_ready():
+	set_target_node()
+	
 func change_target(exlude_index):
 	var neighbour = map.path_connected_nodes(current_node)
 	var i = randi() % neighbour.size()
@@ -84,11 +86,17 @@ func set_target_pos(neighbours, target_x, target_y, i = null):
 		target_pos = Vector2(position.x, round(position.y - map.GRID_SIZE))
 	
 func _process(delta):
+	_on_process()
+	
+func _on_process():
 	current_node = current_node()
 	if position.distance_to(target_pos) < 0.1:
 		set_target_node()
 
 func _physics_process(delta):
+	_on_p_process(delta)
+
+func _on_p_process(delta):
 	if sees_player:
 		moving = false
 		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
