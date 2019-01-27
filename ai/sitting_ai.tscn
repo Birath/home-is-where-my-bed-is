@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://ai/walking_ai.gd" type="Script" id=1]
+[ext_resource path="res://ai/sitting_ai.gd" type="Script" id=1]
 [ext_resource path="res://enteties/Speech Bubble.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/human.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Npc oomph.wav" type="AudioStream" id=4]
@@ -15,17 +15,15 @@ extents = Vector2( 1.25, 0.375 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="walking_ai" type="KinematicBody2D" groups=[
-"walking_npc",
+[node name="sitting_ai" type="KinematicBody2D" groups=[
 "npc",
 ]]
 
 input_pickable = false
 collision_layer = 1
-collision_mask = 0
+collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 speech_bubble = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -42,7 +40,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vision_range" index="0"]
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="vision_range" index="0"]
 
 shape = SubResource( 2 )
 

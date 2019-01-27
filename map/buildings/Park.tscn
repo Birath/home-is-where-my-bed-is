@@ -1,0 +1,287 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://map/buildings/Park.gd" type="Script" id=1]
+[ext_resource path="res://map/buildings/Fountain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://map/buildings/Tree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://map/buildings/Bench.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ai/sitting_ai.tscn" type="PackedScene" id=5]
+
+[node name="Park" type="Node2D"]
+
+position = Vector2( 100, 100 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Grass" type="Polygon2D" parent="." index="0"]
+
+polygon = PoolVector2Array( -84, -84, -84, 84, 84, 84, 84, -84 )
+uv = PoolVector2Array(  )
+color = Color( 0.43427, 0.835938, 0.068573, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VerticalROad" type="Polygon2D" parent="." index="1"]
+
+polygon = PoolVector2Array( -10, -84, -10, 84, 10, 84, 10, -84 )
+uv = PoolVector2Array(  )
+color = Color( 0.84375, 0.546244, 0.125244, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HorizontalRoad" type="Polygon2D" parent="." index="2"]
+
+rotation = 1.5708
+polygon = PoolVector2Array( -10, -84, -10, 84, 10, 84, 10, -84 )
+uv = PoolVector2Array(  )
+color = Color( 0.84375, 0.546244, 0.125244, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Center" type="Polygon2D" parent="." index="3"]
+
+polygon = PoolVector2Array( 0, -40, -20, -40, -40, -20, -40, 20, -20, 40, 20, 40, 40, 20, 40, -20, 20, -40 )
+uv = PoolVector2Array(  )
+color = Color( 0.843137, 0.545098, 0.121569, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fountain" parent="." index="4" instance=ExtResource( 2 )]
+
+[node name="Trees" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+z_index = 10
+_sections_unfolded = [ "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree14" parent="Trees" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 50 )
+
+[node name="Tree34" parent="Trees" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 50 )
+
+[node name="Tree15" parent="Trees" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 74 )
+
+[node name="Tree31" parent="Trees" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 74 )
+
+[node name="Tree17" parent="Trees" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 62 )
+
+[node name="Tree37" parent="Trees" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 62 )
+
+[node name="Trees2" type="Node2D" parent="." index="6"]
+
+editor/display_folded = true
+rotation = 3.14159
+z_index = 10
+_sections_unfolded = [ "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree14" parent="Trees2" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 50 )
+
+[node name="Tree34" parent="Trees2" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 50 )
+
+[node name="Tree15" parent="Trees2" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 74 )
+
+[node name="Tree31" parent="Trees2" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 74 )
+
+[node name="Tree17" parent="Trees2" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 62 )
+
+[node name="Tree37" parent="Trees2" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 62 )
+
+[node name="Trees3" type="Node2D" parent="." index="7"]
+
+editor/display_folded = true
+rotation = 1.5708
+z_index = 10
+_sections_unfolded = [ "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree14" parent="Trees3" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 50 )
+
+[node name="Tree34" parent="Trees3" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 50 )
+
+[node name="Tree15" parent="Trees3" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 74 )
+
+[node name="Tree31" parent="Trees3" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 74 )
+
+[node name="Tree17" parent="Trees3" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 62 )
+
+[node name="Tree37" parent="Trees3" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 62 )
+
+[node name="Trees4" type="Node2D" parent="." index="8"]
+
+editor/display_folded = true
+rotation = 4.71239
+z_index = 10
+_sections_unfolded = [ "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree14" parent="Trees4" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 50 )
+
+[node name="Tree34" parent="Trees4" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 50 )
+
+[node name="Tree15" parent="Trees4" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 74 )
+
+[node name="Tree31" parent="Trees4" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 74 )
+
+[node name="Tree17" parent="Trees4" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 20, 62 )
+
+[node name="Tree37" parent="Trees4" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( -20, 62 )
+
+[node name="Benches" type="Node2D" parent="." index="9"]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bench" parent="Benches" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( 35, 23 )
+rotation = -0.785398
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench2" parent="Benches" index="1" instance=ExtResource( 4 )]
+
+position = Vector2( 23, 35 )
+rotation = -0.785398
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench3" parent="Benches" index="2" instance=ExtResource( 4 )]
+
+position = Vector2( -22.9142, 35.0566 )
+rotation = 0.785398
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench4" parent="Benches" index="3" instance=ExtResource( 4 )]
+
+position = Vector2( -35, 23 )
+rotation = 0.785398
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench5" parent="Benches" index="4" instance=ExtResource( 4 )]
+
+position = Vector2( -35, -23 )
+rotation = 2.35619
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench6" parent="Benches" index="5" instance=ExtResource( 4 )]
+
+position = Vector2( -23, -35 )
+rotation = 2.35619
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench7" parent="Benches" index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 35, -23 )
+rotation = -2.35619
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bench8" parent="Benches" index="7" instance=ExtResource( 4 )]
+
+position = Vector2( 23, -35 )
+rotation = -2.35619
+_sections_unfolded = [ "Transform" ]
+
+[node name="sitting_ai" parent="." index="10" instance=ExtResource( 5 )]
+
+position = Vector2( 36, 22 )
+rotation = -0.785398
+_sections_unfolded = [ "Transform" ]
+
+
