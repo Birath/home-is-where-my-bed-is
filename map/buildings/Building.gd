@@ -30,7 +30,7 @@ func _init(map, building, x, y):
 	}
 	
 	for road in buildings[building][0]:
-		map.remove_road(map.get_road(road[0].x, road[0].y, road[1]))
+		map.remove_road(map.get_road(road[0].x + x, road[0].y + y, road[1]))
 	for grid in buildings[building][1]:
 		map.building_occupy(map.building_index(grid.x + x, grid.y + y))
 	

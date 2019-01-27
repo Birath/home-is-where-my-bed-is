@@ -52,8 +52,11 @@ func _ready():
 	for index in range(building_grid.size()):
 		building_grid[index] = true
 	
-	building.new(self, "park", 0, 0)
 	
+	
+	var x = randi() % (WIDTH - 1) 
+	var y = randi() % (HEIGHT - 1)
+	building.new(self, "park", x, y)
 	for index in range(building_grid.size()):
 		if building_grid[index]:
 			building.new(self, "small_house", building_x(index), building_y(index))
