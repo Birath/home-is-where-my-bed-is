@@ -12,7 +12,7 @@
 [ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=10]
 [ext_resource path="res://Obstacle.tscn" type="PackedScene" id=11]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
