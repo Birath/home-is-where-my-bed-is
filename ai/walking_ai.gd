@@ -92,6 +92,7 @@ func _physics_process(delta):
 	if sees_player:
 		moving = false
 		rotation = lerp_angle(rotation, position.angle_to_point(player_body.position) + PI/2, delta*5)
+		return
 	if avoid_obstacle:
 		if position.distance_to(avoid_target) < 0.1:
 			avoid_obstacle = false
